@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using Project.Core.Configuration;
 using Project.Infrastructure.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
@@ -17,6 +17,13 @@ namespace Project.Web.Infrastructure.StartupExtensions
 {
     public static class ServiceCollectionExtensions
     {
+
+        public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.ConfigureStartupConfig<MongodbHostConfig>(configuration.GetSection("MongodbHostConfig"));
+            return services;
+        }
+
         /// <summary>
         /// 注入上下文
         /// </summary>
@@ -130,6 +137,19 @@ namespace Project.Web.Infrastructure.StartupExtensions
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
             return services;
+        }
+
+
+
+        public static TConfig ConfigureStartupConfig<TConfig>(this IServiceCollection services, IConfiguration configuration) where TConfig : class, new()
+        {
+            //create instance of config
+            var config = new TConfig();
+            //bind it to the appropriate section of configuration
+            configuration.Bind(config);
+            //and register it as a service
+            services.AddSingleton(config);
+            return config;
         }
     }
 }

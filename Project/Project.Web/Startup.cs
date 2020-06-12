@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
+using Project.Core.Configuration;
 using Project.Core.Domain.Identity;
 using Project.Infrastructure;
 using Project.Infrastructure.EntityFrameworkCore;
@@ -32,6 +33,7 @@ namespace Project.Web
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+          
             //加载http上下文
             services.AddHttpContextAccessor();
             IdentityModelEventSource.ShowPII = true;//显示错误的详细信息并查看问题
@@ -39,6 +41,7 @@ namespace Project.Web
             {
                 options.AllowSynchronousIO = true;
             });
+            services.AddConfig(Configuration);
             services.AddApplicationDbContext(Configuration);//DbContext上下文
             services.AddIdentityOptions();
             services.AddAutoMapper(typeof(Startup));//autoap
