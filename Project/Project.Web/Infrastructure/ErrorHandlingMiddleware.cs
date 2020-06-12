@@ -12,13 +12,11 @@ namespace Project.Web.Infrastructure
     {
         private readonly RequestDelegate _next;
         private readonly ILog _log;
-
         public ErrorHandlingMiddleware(RequestDelegate next)
         {
             _next = next; 
             _log = LogManager.GetLogger(typeof(ErrorHandlingMiddleware));
         }
-
         public async Task Invoke(HttpContext context)
         {
             try

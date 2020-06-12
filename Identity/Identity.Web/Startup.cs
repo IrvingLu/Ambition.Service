@@ -21,8 +21,6 @@ namespace Identity.Web
         }
 
         public IConfiguration Configuration { get; }
-        private readonly string serviceId = Guid.NewGuid().ToString();
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(
@@ -47,44 +45,8 @@ namespace Identity.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
             app.UseHealthChecks("/health");
-            lifetime.ApplicationStarted.Register(OnStart);
-            lifetime.ApplicationStopped.Register(OnStopped);
             app.UseIdentityServer();
         }
-        /// <summary>
-        /// 服务注册
-        /// </summary>
-        private void OnStart()
-        {
-            var serviceConfig = Configuration.GetSection("ApplicationConfiguration").GetSection("SerivceAddress");
-            var client = new ConsulClient(ConsulConfig);
-            ///健康检查
-            var httpCheck = new AgentServiceCheck()
-            {
-                DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(10),//服务出错1分钟之后，取消服务
-                Interval = TimeSpan.FromSeconds(10),///检查周期
-                HTTP = serviceConfig.GetSection("HttpType").Value + serviceConfig.GetSection("Address").Value + ":" + Convert.ToInt32(serviceConfig.GetSection("Port").Value) + "/health"
-            };
-            ///服务注册
-            var agentReg = new AgentServiceRegistration()
-            {
-                ID = serviceId,
-                Check = httpCheck,
-                Address = serviceConfig.GetSection("Address").Value,
-                Port = Convert.ToInt32(serviceConfig.GetSection("Port").Value),
-                Name = serviceConfig.GetSection("Name").Value,
-            };
-            client.Agent.ServiceRegister(agentReg).ConfigureAwait(false);
-        }
-        private void OnStopped()
-        {
-            var client = new ConsulClient(ConsulConfig);
-            client.Agent.ServiceDeregister(serviceId).ConfigureAwait(false);
-        }
 
-        private void ConsulConfig(ConsulClientConfiguration consul)
-        {
-            consul.Address = new Uri(Configuration.GetSection("ApplicationConfiguration").GetSection("ConsulAddress").Value);
-        }
     }
 }

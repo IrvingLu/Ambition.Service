@@ -12,7 +12,6 @@ namespace Project.Web.Infrastructure
     {
         protected override void Load(ContainerBuilder builder)
         {
-
             //data
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(DapperQuery<>)).As(typeof(IDapperQuery<>)).InstancePerLifetimeScope();

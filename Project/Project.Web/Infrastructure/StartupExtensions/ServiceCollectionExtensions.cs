@@ -17,13 +17,11 @@ namespace Project.Web.Infrastructure.StartupExtensions
 {
     public static class ServiceCollectionExtensions
     {
-
         public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.ConfigureStartupConfig<MongodbHostConfig>(configuration.GetSection("MongodbHostConfig"));
             return services;
         }
-
         /// <summary>
         /// 注入上下文
         /// </summary>
@@ -56,11 +54,9 @@ namespace Project.Web.Infrastructure.StartupExtensions
                 options.Lockout.AllowedForNewUsers = false;
                 // 用户设置
                 options.User.RequireUniqueEmail = false; //是否Email地址必须唯一
-
             });
             return services;
         }
-
         /// <summary>
         /// 资源服务器注入
         /// </summary>
@@ -138,16 +134,13 @@ namespace Project.Web.Infrastructure.StartupExtensions
             });
             return services;
         }
-
-
-
         public static TConfig ConfigureStartupConfig<TConfig>(this IServiceCollection services, IConfiguration configuration) where TConfig : class, new()
         {
-            //create instance of config
+            //创建配置
             var config = new TConfig();
-            //bind it to the appropriate section of configuration
+            //绑定
             configuration.Bind(config);
-            //and register it as a service
+            //注册
             services.AddSingleton(config);
             return config;
         }

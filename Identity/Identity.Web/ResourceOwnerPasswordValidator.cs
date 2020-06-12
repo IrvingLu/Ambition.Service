@@ -29,14 +29,12 @@ namespace Identity.Web
                     //短信认证成功，返回token
                     context.Result = new GrantValidationResult(user.Id.ToString(), user.UserName, GetUserClaim(user));
                 }
-            
                 else
                 {
                     user = await _userManager.FindByNameAsync(context.UserName);
                     ///判断用户是否存在
                     if (user != null)
                     {
-
                         var result = await _signInManager.PasswordSignInAsync(context.UserName, context.Password, false, lockoutOnFailure: false);
                         ///判断验证是否成功
                         if (result.Succeeded)

@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
-using Project.Core.Configuration;
 using Project.Core.Domain.Identity;
 using Project.Infrastructure;
 using Project.Infrastructure.EntityFrameworkCore;
@@ -30,14 +29,12 @@ namespace Project.Web
         }
 
         public IConfiguration Configuration { get; }
-
         /// <summary>
         /// 服务
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-          
             //加载http上下文
             services.AddHttpContextAccessor();
             //解决.netcore 编码问题
@@ -55,7 +52,6 @@ namespace Project.Web
                                     .AllowAnyMethod()
                                     .AllowAnyHeader()
                                     .AllowCredentials());
-
             });
             //配置hangfire定时任务
             services.AddHangfire(x => x.UseStorage(new MySqlStorage(Configuration.GetConnectionString("MySql") + ";Allow User Variables=true", new MySqlStorageOptions
@@ -72,11 +68,9 @@ namespace Project.Web
             services.AddSignalR();
             services.AddApiVersion();//api版本
             services.AddController();//api控制器
-
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                   .AddEntityFrameworkStores<ApplicationDbContext>()
                   .AddDefaultTokenProviders();//Identity 注入
-
         }
         /// <summary>
         /// 中间件管道
