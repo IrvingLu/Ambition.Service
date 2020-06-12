@@ -2,7 +2,6 @@ using Consul;
 using Identity.Core.Domain;
 using Identity.Data;
 using Identity.Service.Identity;
-using Identity.Web.Controller;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
