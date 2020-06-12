@@ -53,13 +53,12 @@ namespace Project.Infrastructure.Repositories
         #region Utilities
 
         /// <summary>
-        /// Rollback of entity changes and return full error message
+        /// 回滚
         /// </summary>
         /// <param name="exception">Exception</param>
         /// <returns>Error message</returns>
         protected string GetFullErrorTextAndRollbackEntityChanges(DbUpdateException exception)
         {
-            //rollback entity changes
             if (_context is DbContext dbContext)
             {
                 var entries = dbContext.ChangeTracker.Entries()
@@ -102,7 +101,6 @@ namespace Project.Infrastructure.Repositories
             }
             catch (DbUpdateException exception)
             {
-                //ensure that the detailed error text is saved in the Log
                 throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
             }
         }
@@ -124,7 +122,6 @@ namespace Project.Infrastructure.Repositories
             }
             catch (DbUpdateException exception)
             {
-                //ensure that the detailed error text is saved in the Log
                 throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
             }
         }
@@ -161,7 +158,6 @@ namespace Project.Infrastructure.Repositories
             }
             catch (DbUpdateException exception)
             {
-                //ensure that the detailed error text is saved in the Log
                 throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
             }
         }
@@ -181,7 +177,6 @@ namespace Project.Infrastructure.Repositories
             }
             catch (DbUpdateException exception)
             {
-                //ensure that the detailed error text is saved in the Log
                 throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
             }
         }
@@ -202,7 +197,6 @@ namespace Project.Infrastructure.Repositories
             }
             catch (DbUpdateException exception)
             {
-                //ensure that the detailed error text is saved in the Log
                 throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
             }
         }
@@ -223,7 +217,6 @@ namespace Project.Infrastructure.Repositories
             }
             catch (DbUpdateException exception)
             {
-                //ensure that the detailed error text is saved in the Log
                 throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
             }
         }
@@ -244,7 +237,6 @@ namespace Project.Infrastructure.Repositories
             }
             catch (DbUpdateException exception)
             {
-                //ensure that the detailed error text is saved in the Log
                 throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
             }
         }
@@ -254,18 +246,15 @@ namespace Project.Infrastructure.Repositories
         #region Properties
 
         /// <summary>
-        /// Gets a table
+        /// 列表
         /// </summary>
         public virtual IQueryable<TEntity> Table => Entities;
 
         /// <summary>
-        /// Gets a table with "no tracking" enabled (EF feature) Use it only when you load record(s) only for read-only operations
+        ///列表 AsNoTracking
         /// </summary>
         public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
-        /// <summary>
-        /// Gets an entity set
-        /// </summary>
         protected virtual DbSet<TEntity> Entities => _entities ?? (_entities = _context.Set<TEntity>());
 
         #endregion
