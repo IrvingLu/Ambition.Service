@@ -6,7 +6,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Identity.Web.Controller
+namespace Identity.Web
 {
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
