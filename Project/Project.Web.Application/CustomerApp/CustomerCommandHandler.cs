@@ -55,10 +55,6 @@ namespace Project.Web.Application.CustomerApp
         /// <returns></returns>
         public async Task<PagedResultDto<CustomersDto>> Handle(PageCustomerCommand request, CancellationToken cancellationToken)
         {
-
-            CustomersDto customersDto = new CustomersDto();
-            customersDto = null;
-            var ss = customersDto.Name;
             var query = _customerRepository.TableNoTracking;
             var data = await query.PageBy(request.PageIndex, request.PageSize).ToListAsync();
             var result = _mapper.Map<List<CustomersDto>>(data);

@@ -124,8 +124,8 @@ namespace Project.Web.Infrastructure.StartupExtensions
             {
                 // 忽略循环引用
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                // 不使用驼峰
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //// 不使用驼峰
+                //options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 // 设置时间格式
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });

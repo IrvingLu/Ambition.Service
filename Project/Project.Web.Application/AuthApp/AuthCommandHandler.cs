@@ -16,7 +16,6 @@ namespace Project.Web.Application.AuthApp
         {
             _configuration = configuration;
         }
-
         /// <summary>
         /// 登录
         /// </summary>
