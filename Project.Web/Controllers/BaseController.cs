@@ -2,6 +2,9 @@
 
 namespace Project.Web.Controllers
 {
+    /// <summary>
+    /// 自定义状态码
+    /// </summary>
     public class BaseController : ControllerBase
     {
         #region 用户相关

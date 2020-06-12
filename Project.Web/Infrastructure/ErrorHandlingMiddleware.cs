@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Project.Core.DataResult;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace Project.Web.Infrastructure
