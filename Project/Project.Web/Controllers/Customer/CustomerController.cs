@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Project.Core.DataResult;
+using Project.Core.ApiResult;
 using Project.Web.Application.CustomerApp.Commands;
 using System;
 using System.Net;
@@ -30,7 +30,7 @@ namespace Project.Web.Controllers.Customer
         public async Task<IActionResult> GetAllAsync([FromQuery]PageCustomerCommand  pageCustomerCommand)
         {
            var result= await _mediator.Send(pageCustomerCommand);
-            return Ok(new DataListResultDto((int)HttpStatusCode.OK, "Success",result.Items,result.TotalCount));
+            return Ok(new DataListResult((int)HttpStatusCode.OK, "Success",result.Data,result.TotalCount));
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Project.Web.Controllers.Customer
         public async Task<IActionResult> GetAsync(Guid id)
         {
             var result = await _mediator.Send(new DetailCuustomerCommand(id));
-            return Ok(new DataResultDto((int)HttpStatusCode.OK, "Success", result));
+            return Ok(new DataResult((int)HttpStatusCode.OK, "Success", result));
         }
         /// <summary>
         /// 新增
