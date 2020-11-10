@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Project.Core.Entities;
+using Project.Core.BaseDto;
 using Project.Web.Application.CustomerApp.Dto;
 using System;
 

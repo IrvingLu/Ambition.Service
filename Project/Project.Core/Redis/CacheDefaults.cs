@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project.Core.Cache
+namespace Project.Core.Redis
 {
     public static class CacheDefaults
     {

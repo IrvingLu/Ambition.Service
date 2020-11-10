@@ -1,8 +1,8 @@
-﻿using Project.Core.DataResult;
+﻿using Project.Core.ApiResult;
 
 namespace Project.Web.Application.AuthApp.Dto
 {
-    public class TokenDto:BaseResultDto
+    public class TokenDto:BaseResult
     {
         /// <summary>
         /// token（如果验证通过返回token）

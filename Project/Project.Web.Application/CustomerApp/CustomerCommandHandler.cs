@@ -1,38 +1,21 @@
-﻿/// ***********************************************************************
-///
-/// =================================
-/// CLR版本    ：4.0.30319.42000
-/// 命名空间    ：Project.Service
-/// 文件名称    ：CreateProjectCommandHandler.cs
-/// =================================
-/// 创 建 者    ：鲁岩奇
-/// 创建日期    ：2019/12/4 11:14:39 
-/// 功能描述    ：
-/// 使用说明    ：
-/// =================================
-/// 修改者    ：
-/// 修改日期    ：
-/// 修改内容    ：
-/// =================================
-///
-/// ***********************************************************************
+﻿/************************************************************************
+*本页作者    ：鲁帅
+*创建日期    ：2020/11/10 9:19:29 
+*功能描述    ：命令Handler
+*使用说明    ：
+***********************************************************************/
 
 using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Project.Core.DataResult;
 using Project.Core.Domain;
 using Project.Infrastructure.Repositories;
 using Project.Web.Application.CustomerApp.Commands;
-using Project.Web.Application.CustomerApp.Dto;
-using Project.Web.Core.Extensions;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Project.Web.Application.CustomerApp
 {
-    public class CustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Unit>, IRequestHandler<UpdateCustomerCommand, Unit>, IRequestHandler<DeleteCustomerCommand, Unit>, IRequestHandler<PageCustomerCommand, PagedResultDto<CustomersDto>>, IRequestHandler<DetailCuustomerCommand, CustomerDto>
+    public class CustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Unit>, IRequestHandler<UpdateCustomerCommand, Unit>, IRequestHandler<DeleteCustomerCommand, Unit>
     {
         #region Fileds
         private readonly IRepository<Customer> _customerRepository;
@@ -44,34 +27,7 @@ namespace Project.Web.Application.CustomerApp
         {
             _customerRepository = customerRepository;
             _mapper = mapper;
-        }
-
-
-        /// <summary>
-        /// 获取所有
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public async Task<PagedResultDto<CustomersDto>> Handle(PageCustomerCommand request, CancellationToken cancellationToken)
-        {
-            var query = _customerRepository.TableNoTracking;
-            var data = await query.PageBy(request.PageIndex, request.PageSize).ToListAsync();
-            var result = _mapper.Map<List<CustomersDto>>(data);
-            return new PagedResultDto<CustomersDto>(await query.CountAsync(), result);
-        }
-        /// <summary>
-        /// 详情
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public async Task<CustomerDto> Handle(DetailCuustomerCommand request, CancellationToken cancellationToken)
-        {
-            var data = await _customerRepository.GetByIdAsync(request.Id);
-            var result = _mapper.Map<CustomerDto>(data);
-            return result;
-        }
+        } 
         /// <summary>
         /// 添加
         /// </summary>

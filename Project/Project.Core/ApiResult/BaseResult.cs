@@ -1,6 +1,6 @@
-﻿namespace Project.Core.DataResult
+﻿namespace Project.Core.ApiResult
 {
-    public class BaseResultDto
+    public class BaseResult
     {
         /// <summary>
         /// 状态码
@@ -12,12 +12,12 @@
         /// </summary>
         public string Message { get; set; }
 
-        public BaseResultDto()
+        public BaseResult()
         {
 
         }
 
-        public BaseResultDto(int code, string message)
+        public BaseResult(int code, string message)
         {
             Code = code;
             Message = message;

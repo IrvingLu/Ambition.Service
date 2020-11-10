@@ -1,14 +1,14 @@
-﻿namespace Project.Core.DataResult
+﻿namespace Project.Core.ApiResult
 {
-    public class DataResultDto : BaseResultDto
+    public class DataResult : BaseResult
     {
         public object Data { get; set; }
 
-        public DataResultDto()
+        public DataResult()
         {
 
         }
-        public DataResultDto(int code, string message, object data) : base(code, message)
+        public DataResult(int code, string message, object data) : base(code, message)
         {
             Code = code;
             Message = message;
@@ -16,16 +16,16 @@
         }
     }
 
-    public class DataListResultDto : BaseResultDto
+    public class DataListResult : BaseResult
     {
         public object Data { get; set; }
         public int Count { get; set; }
 
-        public DataListResultDto()
+        public DataListResult()
         {
 
         }
-        public DataListResultDto(int code, string message, object data, int count) : base(code, message)
+        public DataListResult(int code, string message, object data, int count) : base(code, message)
         {
             Code = code;
             Message = message;

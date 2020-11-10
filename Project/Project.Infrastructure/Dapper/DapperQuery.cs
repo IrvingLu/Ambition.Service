@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 
 namespace Project.Infrastructure.Dapper
 {
-    public class DapperQuery<TEntity> : IDapperQuery<TEntity> where TEntity : class, IEntity
+    public class DapperQuery<TEntity> : IDapperQuery<TEntity> where TEntity : class
     {
         private readonly IConfiguration _configuration;
         public DapperQuery(IConfiguration Configuration)

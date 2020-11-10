@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Project.Core.Cache
+namespace Project.Core.Redis
 {
     public class CsRedisHelper : ICsRedisHelper
     {

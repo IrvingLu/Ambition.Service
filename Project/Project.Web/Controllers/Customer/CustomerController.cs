@@ -51,7 +51,7 @@ namespace Project.Web.Controllers.Customer
         public async Task<IActionResult> InsertAsync(CreateCustomerCommand createCustomerCommand)
         {
             await _mediator.Send(createCustomerCommand);
-            return Ok(new BaseResultDto((int)HttpStatusCode.OK, "Success"));
+            return Ok(new BaseResult((int)HttpStatusCode.OK, "Success"));
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Project.Web.Controllers.Customer
         public async Task<IActionResult> UpdateAsync(UpdateCustomerCommand updateCustomerCommand)
         {
             await _mediator.Send(updateCustomerCommand);
-            return Ok(new BaseResultDto((int)HttpStatusCode.OK, "Success"));
+            return Ok(new BaseResult((int)HttpStatusCode.OK, "Success"));
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Project.Web.Controllers.Customer
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             await _mediator.Send(new DeleteCustomerCommand(id));
-            return Ok(new BaseResultDto((int)HttpStatusCode.OK, "Success"));
+            return Ok(new BaseResult((int)HttpStatusCode.OK, "Success"));
         }
 
     }

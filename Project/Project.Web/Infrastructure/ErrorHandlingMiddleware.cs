@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Project.Core.DataResult;
+using Project.Core.ApiResult;
 using System;
 using System.Threading.Tasks;
 
@@ -76,7 +76,7 @@ namespace Project.Web.Infrastructure
             {
                 ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
             };
-            var result = JsonConvert.SerializeObject(new BaseResultDto(statusCode, msg), Formatting.None, setting);
+            var result = JsonConvert.SerializeObject(new BaseResult(statusCode, msg), Formatting.None, setting);
             response.ContentType = "application/json;charset=utf-8";
             response.WriteAsync(result);
             return Task.CompletedTask;

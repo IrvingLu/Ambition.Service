@@ -27,7 +27,7 @@ namespace Project.Web.Controllers.User
         public async Task<IActionResult> InsertAsync(CreateUserCommand createUserCommand)
         {
             await _mediator.Send(createUserCommand);
-            return Ok(new BaseResultDto((int)HttpStatusCode.OK, "Success"));
+            return Ok(new BaseResult((int)HttpStatusCode.OK, "Success"));
         }
     }
 }

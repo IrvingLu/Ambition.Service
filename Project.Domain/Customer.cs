@@ -1,10 +1,17 @@
-﻿using System.ComponentModel;
+﻿
 
-namespace Project.Core.Enums
+using Project.Core.Entities;
+using System.ComponentModel;
+
+namespace Project.Core.Domain
 {
-    public enum CustomerEnum
+    public class Customer : Entity
     {
+        public string Name { get; set; }
+
     }
+
+
     /// <summary>
     /// 位移枚举
     /// </summary>
