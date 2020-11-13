@@ -58,7 +58,7 @@ namespace Project.Core.Mongodb
             }
         }
 
-        public static Task<int> GridFSAddAsync(MongodbHostConfig host, T t)
+        public static Task<int> GridFSAddAsync(MongodbHostConfig host)
         {
             try
             {
@@ -90,10 +90,10 @@ namespace Project.Core.Mongodb
                 client.InsertMany(t);
                 return 1;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return 0;
-                throw ex;
+                throw ;
             }
         }
 
@@ -150,9 +150,9 @@ namespace Project.Core.Mongodb
                 var updatefilter = Builders<T>.Update.Combine(list);
                 return client.UpdateOne(filter, updatefilter);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -185,9 +185,9 @@ namespace Project.Core.Mongodb
                 var updatefilter = Builders<T>.Update.Combine(list);
                 return await client.UpdateOneAsync(filter, updatefilter);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -221,9 +221,9 @@ namespace Project.Core.Mongodb
                 var updatefilter = Builders<T>.Update.Combine(list);
                 return client.UpdateMany(filter, updatefilter);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -257,9 +257,9 @@ namespace Project.Core.Mongodb
                 var updatefilter = Builders<T>.Update.Combine(list);
                 return await client.UpdateManyAsync(filter, updatefilter);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                throw ex;
+                throw ;
             }
         }
 
@@ -281,9 +281,9 @@ namespace Project.Core.Mongodb
                 FilterDefinition<T> filter = Builders<T>.Filter.Eq("_id", new ObjectId(id));
                 return client.DeleteOne(filter);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
 
         }
@@ -307,11 +307,10 @@ namespace Project.Core.Mongodb
                 FilterDefinition<T> filter = Builders<T>.Filter.Eq("id", id);
                 return await client.DeleteOneAsync(filter);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
-
         }
 
         #endregion
@@ -331,9 +330,9 @@ namespace Project.Core.Mongodb
                 var client = MongodbClient<T>.MongodbInfoClient(host);
                 return client.DeleteMany(filter);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
 
         }
@@ -355,11 +354,10 @@ namespace Project.Core.Mongodb
                 var client = MongodbClient<T>.MongodbInfoClient(host);
                 return await client.DeleteManyAsync(filter);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
-
         }
 
         #endregion
@@ -381,9 +379,9 @@ namespace Project.Core.Mongodb
                 return client.Count(filter);
 #pragma warning restore CS0618 // 类型或成员已过时
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -406,9 +404,9 @@ namespace Project.Core.Mongodb
                 return await client.CountAsync(filter);
 #pragma warning restore CS0618 // 类型或成员已过时
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -446,9 +444,9 @@ namespace Project.Core.Mongodb
                 fieldList?.Clear();
                 return client.Find(filter).Project<T>(projection).FirstOrDefault<T>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -533,9 +531,9 @@ namespace Project.Core.Mongodb
                 //排序查询
                 return client.Find(filter).Sort(sort).Project<T>(projection).ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -577,9 +575,9 @@ namespace Project.Core.Mongodb
                 //排序查询
                 return await client.Find(filter).Sort(sort).Project<T>(projection).ToListAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -636,9 +634,9 @@ namespace Project.Core.Mongodb
                     .Limit(pageSize).ToList();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -692,9 +690,9 @@ namespace Project.Core.Mongodb
                     .Limit(pageSize).ToListAsync();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 

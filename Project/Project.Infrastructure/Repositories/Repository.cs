@@ -255,7 +255,7 @@ namespace Project.Infrastructure.Repositories
         /// </summary>
         public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
-        protected virtual DbSet<TEntity> Entities => _entities ?? (_entities = _context.Set<TEntity>());
+        protected virtual DbSet<TEntity> Entities => _entities ??= _context.Set<TEntity>();
 
         #endregion
     }

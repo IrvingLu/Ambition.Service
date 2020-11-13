@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Project.Infrastructure.Dapper;
 using Project.Infrastructure.EntityFrameworkCore;
 using Project.Infrastructure.Repositories;
 using Project.Web.Application.CustomerApp;
@@ -14,7 +13,6 @@ namespace Project.Web.Infrastructure
         {
             //data
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
-            builder.RegisterGeneric(typeof(DapperQuery<>)).As(typeof(IDapperQuery<>)).InstancePerLifetimeScope();
             builder.RegisterType<ApplicationDbContext>().AsSelf();
             //注入command
             builder.RegisterAssemblyTypes(typeof(CustomerCommandHandler).GetTypeInfo().Assembly);

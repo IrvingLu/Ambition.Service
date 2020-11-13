@@ -23,7 +23,7 @@ namespace Identity.Web
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(
                  Configuration.GetConnectionString("DefaultConnection")));
             //身份验证配置
             services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -42,7 +42,7 @@ namespace Identity.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseHealthChecks("/health");
             app.UseIdentityServer();

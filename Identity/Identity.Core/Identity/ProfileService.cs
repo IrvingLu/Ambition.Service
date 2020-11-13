@@ -27,9 +27,9 @@ namespace Identity.Service.Identity
                 context.IssuedClaims = claims.ToList();
                 return Task.CompletedTask;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 

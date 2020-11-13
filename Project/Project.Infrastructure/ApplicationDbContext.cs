@@ -11,13 +11,8 @@ namespace Project.Infrastructure.EntityFrameworkCore
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
-        private readonly IMediator _mediator;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IMediator mediator) : base(options) 
-        {
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        }
         #region 数据库
 
         public DbSet<Customer> Customer { get; set; }
