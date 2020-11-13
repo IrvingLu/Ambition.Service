@@ -3,9 +3,6 @@
 # net5开发框架
 
 **不知道起个什么名好，反正也没有人会用，自己慢慢把常用的一些东西更新到里面**
-## 语言
-
-> c#
 
 ## 框架
 
@@ -15,10 +12,16 @@
 
 > 可以连接mysql，sqlserver,postgresql
 
+
+## 文件夹结构
+
+> identity：认证服务
+> project：项目文件夹
+
 ## 技术框架使用
 
-> automapper，EF Core，Dapper，CQRS等
-
+> automapper，identity4，EF Core，Dapper，CQRS等
+> DDD设计思想
 
 ## 版本更新
 ### 2020-11-13
