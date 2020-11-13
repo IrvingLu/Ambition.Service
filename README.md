@@ -1,3 +1,27 @@
-认证服务，资源服务
-automapper,cqrs,dapper ,ef,identity4 Repositories redis,mongo domain
-11.10号 出了net5  稍后会升级到net5  
+
+
+# net5开发框架
+
+**不知道起个什么名好，反正也没有人会用，自己慢慢把常用的一些东西更新到里面**
+## 语言
+
+> c#
+
+## 框架
+
+> .net5
+
+## 数据库
+
+> 可以连接mysql，sqlserver,postgresql
+
+## 技术框架使用
+
+> automapper，EF Core，Dapper，CQRS等
+
+
+## 版本更新
+### 2020-11-13
+**版本升级到net5*
+### 2020-11-12
+**整理代码，之前的没有记录，从今天开始记录每一次上传的内容
