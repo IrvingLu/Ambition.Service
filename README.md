@@ -18,11 +18,13 @@
 ## 文件夹结构
 
 > identity：认证服务
+
 > project：基础服务
 
 ## 技术框架使用
 
 > automapper，identity4，EF Core，Dapper，CQRS等
+
 > DDD设计思想
 
 ## 版本更新
