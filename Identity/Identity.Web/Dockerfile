@@ -1,17 +1,17 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["MicroService/Identity/Identity.Web/Identity.Web.csproj", "MicroService/Identity/Identity.Web/"]
-COPY ["MicroService/Identity/Identity.Infrastructure/Identity.Infrastructure.csproj", "MicroService/Identity/Identity.Infrastructure/"]
-COPY ["MicroService/Identity/Identity.Core/Identity.Core.csproj", "MicroService/Identity/Identity.Core/"]
-RUN dotnet restore "MicroService/Identity/Identity.Web/Identity.Web.csproj"
+COPY ["Identity/Identity.Web/Identity.Web.csproj", "Identity/Identity.Web/"]
+COPY ["Identity/Identity.Infrastructure/Identity.Infrastructure.csproj", "Identity/Identity.Infrastructure/"]
+COPY ["Identity/Identity.Core/Identity.Core.csproj", "Identity/Identity.Core/"]
+RUN dotnet restore "Identity/Identity.Web/Identity.Web.csproj"
 COPY . .
-WORKDIR "/src/MicroService/Identity/Identity.Web"
+WORKDIR "/src/Identity/Identity.Web"
 RUN dotnet build "Identity.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish

@@ -32,9 +32,7 @@ namespace Project.Web.Infrastructure.StartupExtensions
         {
             services.AddDbContext<ApplicationDbContext>(
                 options => options
-                    .UseMySql(configuration.GetConnectionString("MySql"), new MySqlServerVersion(new Version(8, 0, 21)) // use MariaDbServerVersion for MariaDB
-            ));
-            //services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(configuration.GetConnectionString("MySql")), ServiceLifetime.Transient);
+                    .UseMySql(configuration.GetConnectionString("MySql"), new MySqlServerVersion(new Version(8, 0, 21))), ServiceLifetime.Transient);
             return services;
         }
         /// <summary>
