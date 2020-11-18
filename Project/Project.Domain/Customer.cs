@@ -9,6 +9,8 @@ namespace Project.Core.Domain
     {
         public string Name { get; set; }
 
+        public int Sex { get; set; }
+
     }
 
 
