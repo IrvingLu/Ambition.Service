@@ -1,11 +1,29 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.Core.BaseDto;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Project.Web.Core.Extensions
 {
     public static class QueryableExtensions
     {
+        /// <summary>
+        /// 异步分页
+        /// </summary>
+        public async static Task<PagedResultDto> ToPageListAsync<T>(this IQueryable<T> query, int pageIndex, int pageSize)
+        {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+            return new PagedResultDto()
+            {
+                TotalCount = await query.CountAsync(),
+                Data = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync()
+            };
+        }
         /// <summary>
         /// 分页扩展
         /// </summary>
@@ -13,60 +31,29 @@ namespace Project.Web.Core.Extensions
         {
             if (query == null)
             {
-                throw new ArgumentNullException("query");
+                throw new ArgumentNullException(nameof(query));
             }
             return query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
         /// <summary>
-        /// 过滤扩展
+        /// 过滤
         /// </summary>
-        /// <param name="query">Queryable to apply filtering</param>
-        /// <param name="condition">A boolean value</param>
-        /// <param name="predicate">Predicate to filter the query</param>
-        /// <returns>Filtered or not filtered query based on <paramref name="condition"/></returns>
         public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, bool condition, Expression<Func<T, bool>> predicate)
         {
             return condition
                 ? query.Where(predicate)
                 : query;
         }
-
-        public static IQueryable<T> WhereByString<T>(
-            this IQueryable<T> query,
-            string str,
-            Expression<Func<T, bool>> exp)
+        /// <summary>
+        /// 空字符串过滤
+        /// </summary>
+        public static IQueryable<T> WhereByString<T>(this IQueryable<T> query,string str,Expression<Func<T, bool>> predicate)
         {
             if (string.IsNullOrWhiteSpace(str))
             {
                 return query;
             }
-
-            return query.Where(exp);
-        }
-
-        public static IQueryable<T> WhereByNullable<T, V>(
-            this IQueryable<T> query,
-            V? v,
-            Expression<Func<T, bool>> exp) where V : struct
-        {
-            if (v == null)
-            {
-                return query;
-            }
-            return query.Where(exp);
-        }
-
-        public static IQueryable<T> WhereByNullable<T, Object>(
-            this IQueryable<T> query,
-            Object v,
-            Expression<Func<T, bool>> exp)
-        {
-            if (v == null)
-            {
-                return query;
-            }
-
-            return query.Where(exp);
+            return query.Where(predicate);
         }
     }
 }

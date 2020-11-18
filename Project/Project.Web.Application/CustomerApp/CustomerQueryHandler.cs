@@ -45,9 +45,9 @@ namespace Project.Web.Appliccation.CustomerApp
         public async Task<PagedResultDto> Handle(PageCustomerCommand request, CancellationToken cancellationToken)
         {
             var query = _customerRepository.TableNoTracking;
-            var data = await query.PageBy(request.PageIndex, request.PageSize).ToListAsync();
-            var result = _mapper.Map<List<CustomersDto>>(data);
-            return new PagedResultDto(await query.CountAsync(), result);
+            var pageResult = await query.ToPageListAsync(request.PageIndex, request.PageSize);
+            pageResult.Data = _mapper.Map<List<CustomersDto>>(pageResult.Data);
+            return pageResult;
         }
         /// <summary>
         /// 详情
