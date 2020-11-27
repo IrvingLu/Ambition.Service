@@ -15,4 +15,6 @@ namespace Project.Domain.Product
         /// </summary>
         public string PicPath { get; set; }
     }
+
+
 }

@@ -27,7 +27,6 @@ namespace Project.Web
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
         /// <summary>
         /// 服务
@@ -53,19 +52,21 @@ namespace Project.Web
                                     .AllowAnyHeader()
                                     .AllowCredentials());
             });
+            //redis配置
+            RedisHelper.Initialization(new CSRedis.CSRedisClient(Configuration.GetConnectionString("CsRedisCachingConnectionString")));
             //配置hangfire定时任务
             services.AddHangfire(x => x.UseStorage(new MySqlStorage(Configuration.GetConnectionString("MySql") + ";Allow User Variables=true", new MySqlStorageOptions
             {
                 TablePrefix = "Hangfire"
             })));
-            services.AddConfig(Configuration);
+            services.AddConfig(Configuration);//配置文件
             services.AddApplicationDbContext(Configuration);//DbContext上下文
-            services.AddIdentityOptions();
-            services.AddAutoMapper(typeof(Startup));//autoap
+            services.AddIdentityOptions();//身份认证配置
+            services.AddAutoMapper(typeof(Startup));//automapper
             services.AddMediatR(typeof(Startup));//CQRS
             services.AddHealthChecks();//健康检查
             services.AddAuthService(Configuration);//认证服务
-            services.AddSignalR();
+            services.AddSignalR();//SignalR
             services.AddApiVersion();//api版本
             services.AddController();//api控制器
             services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -113,6 +114,10 @@ namespace Project.Web
             //15
            // RecurringJob.AddOrUpdate<IHanfireTaskService>("OrderReceivedConfirmAuto", job => job.OrderReceivedConfirmAuto(15), Cron.Minutely);//"0 */1 * * * ?"
         }
+        /// <summary>
+        /// autofac依赖注入
+        /// </summary>
+        /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new DependencyRegistrar());
