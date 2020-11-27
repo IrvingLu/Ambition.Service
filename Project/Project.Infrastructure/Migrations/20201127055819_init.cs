@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Project.Infrastructure.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,6 +29,10 @@ namespace Project.Infrastructure.Migrations
                     Id = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: false),
                     NickName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     Avatar = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Address_Province = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Address_City = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Address_County = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Address_Street = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     UserName = table.Column<string>(type: "varchar(256) CHARACTER SET utf8mb4", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "varchar(256) CHARACTER SET utf8mb4", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "varchar(256) CHARACTER SET utf8mb4", maxLength: 256, nullable: true),
@@ -50,15 +54,16 @@ namespace Project.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    PicPath = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_Product", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,7 +228,7 @@ namespace Project.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

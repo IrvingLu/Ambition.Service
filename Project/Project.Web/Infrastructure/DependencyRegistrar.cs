@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Project.Infrastructure.EntityFrameworkCore;
 using Project.Infrastructure.Repositories;
-using Project.Web.Application.CustomerApp;
+using Project.Web.Application.ProductApp;
 using System.Reflection;
 using Module = Autofac.Module;
 
@@ -15,7 +15,7 @@ namespace Project.Web.Infrastructure
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             builder.RegisterType<ApplicationDbContext>().AsSelf();
             //注入command
-            builder.RegisterAssemblyTypes(typeof(CustomerCommandHandler).GetTypeInfo().Assembly);
+            builder.RegisterAssemblyTypes(typeof(ProductCommandHandler).GetTypeInfo().Assembly);
         }
     }
 }

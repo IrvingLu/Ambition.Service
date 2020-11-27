@@ -2,12 +2,12 @@
 using Project.Core.BaseDto;
 using System;
 
-namespace Project.Web.Application.CustomerApp.Commands
+namespace Project.Web.Application.ProductApp.Commands
 {
-    public class DeleteCustomerCommand : EntityDto, IRequest
+    public class DeleteProductCommand : EntityDto, IRequest
     {
 
-        public DeleteCustomerCommand(Guid id) {
+        public DeleteProductCommand(Guid id) {
 
             this.Id = id;
         }

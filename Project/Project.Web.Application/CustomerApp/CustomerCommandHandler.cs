@@ -8,24 +8,25 @@
 using AutoMapper;
 using MediatR;
 using Project.Core.Domain;
+using Project.Domain.Product;
 using Project.Infrastructure.Repositories;
-using Project.Web.Application.CustomerApp.Commands;
+using Project.Web.Application.ProductApp.Commands;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Project.Web.Application.CustomerApp
+namespace Project.Web.Application.ProductApp
 {
-    public class CustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Unit>, IRequestHandler<UpdateCustomerCommand, Unit>, IRequestHandler<DeleteCustomerCommand, Unit>
+    public class ProductCommandHandler : IRequestHandler<CreateProductCommand, Unit>, IRequestHandler<UpdateProductCommand, Unit>, IRequestHandler<DeleteProductCommand, Unit>
     {
         #region Fileds
-        private readonly IRepository<Customer> _customerRepository;
+        private readonly IRepository<Product> _ProductRepository;
         private readonly IMapper _mapper;
         #endregion
 
         #region Ctor
-        public CustomerCommandHandler(IRepository<Customer> customerRepository, IMapper mapper)
+        public ProductCommandHandler(IRepository<Product> ProductRepository, IMapper mapper)
         {
-            _customerRepository = customerRepository;
+            _ProductRepository = ProductRepository;
             _mapper = mapper;
         } 
         /// <summary>
@@ -34,10 +35,10 @@ namespace Project.Web.Application.CustomerApp
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Unit> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var result = _mapper.Map<Customer>(request);
-            await _customerRepository.InsertAsync(result);
+            var result = _mapper.Map<Product>(request);
+            await _ProductRepository.InsertAsync(result);
             return new Unit();
         }
         /// <summary>
@@ -46,10 +47,10 @@ namespace Project.Web.Application.CustomerApp
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Unit> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            var result = _mapper.Map<Customer>(request);
-            await _customerRepository.UpdateAsync(result);
+            var result = _mapper.Map<Product>(request);
+            await _ProductRepository.UpdateAsync(result);
             return new Unit();
         }
         /// <summary>
@@ -58,10 +59,10 @@ namespace Project.Web.Application.CustomerApp
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Unit> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            var result = await _customerRepository.GetByIdAsync(request.Id);
-            await _customerRepository.DeleteAsync(result);
+            var result = await _ProductRepository.GetByIdAsync(request.Id);
+            await _ProductRepository.DeleteAsync(result);
             return new Unit();
         }
 

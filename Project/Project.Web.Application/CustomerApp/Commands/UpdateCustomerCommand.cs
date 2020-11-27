@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Project.Core.BaseDto;
 
-namespace Project.Web.Application.CustomerApp.Commands
+namespace Project.Web.Application.ProductApp.Commands
 {
-    public class UpdateCustomerCommand : EntityDto, IRequest
+    public class UpdateProductCommand : EntityDto, IRequest
     {
         public string Name { get;  set; }
     }

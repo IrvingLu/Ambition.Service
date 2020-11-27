@@ -1,19 +1,20 @@
 ﻿using AutoMapper;
 using Project.Core.Domain;
-using Project.Web.Application.CustomerApp.Commands;
-using Project.Web.Application.CustomerApp.Dto;
+using Project.Domain.Product;
+using Project.Web.Application.ProductApp.Commands;
+using Project.Web.Application.ProductApp.Dto;
 
-namespace Project.Web.Application.CustomerApp
+namespace Project.Web.Application.ProductApp
 {
-    public class CustomerMapConfig : Profile
+    public class ProductMapConfig : Profile
     {
-        public CustomerMapConfig()
+        public ProductMapConfig()
         {
             #region MyRegion
-            CreateMap<CreateCustomerCommand, Customer>();
-            CreateMap<UpdateCustomerCommand, Customer>();
-            CreateMap<Customer, CustomersDto>().ForMember(f => f.Name, option => option.MapFrom(c => c.Name + "拼接"));
-            CreateMap<Customer, CustomerDto>();
+            CreateMap<CreateProductCommand, Product>();
+            CreateMap<UpdateProductCommand, Product>();
+            CreateMap<Product, ProductsDto>().ForMember(f => f.Name, option => option.MapFrom(c => c.Name + "拼接"));
+            CreateMap<Product, ProductDto>();
             #endregion
 
         }

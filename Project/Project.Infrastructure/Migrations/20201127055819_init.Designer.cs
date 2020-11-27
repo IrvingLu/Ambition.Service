@@ -9,8 +9,8 @@ using Project.Infrastructure.EntityFrameworkCore;
 namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201118071913_Customer-addsex")]
-    partial class Customeraddsex
+    [Migration("20201127055819_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -121,23 +121,6 @@ namespace Project.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Project.Core.Domain.Customer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("Sex")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customer");
-                });
-
             modelBuilder.Entity("Project.Core.Domain.Identity.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
@@ -234,6 +217,23 @@ namespace Project.Infrastructure.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Project.Domain.Product.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("PicPath")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Product");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Project.Core.Domain.Identity.ApplicationRole", null)
@@ -283,6 +283,36 @@ namespace Project.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Project.Core.Domain.Identity.ApplicationUser", b =>
+                {
+                    b.OwnsOne("Project.Core.Domain.Identity.Address", "Address", b1 =>
+                        {
+                            b1.Property<string>("ApplicationUserId")
+                                .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b1.Property<string>("County")
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b1.Property<string>("Province")
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b1.Property<string>("Street")
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b1.HasKey("ApplicationUserId");
+
+                            b1.ToTable("AspNetUsers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ApplicationUserId");
+                        });
+
+                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }

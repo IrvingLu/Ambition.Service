@@ -10,27 +10,28 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Project.Core.BaseDto;
 using Project.Core.Domain;
+using Project.Domain.Product;
 using Project.Infrastructure.Repositories;
-using Project.Web.Application.CustomerApp.Commands;
-using Project.Web.Application.CustomerApp.Dto;
+using Project.Web.Application.ProductApp.Commands;
+using Project.Web.Application.ProductApp.Dto;
 using Project.Web.Core.Extensions;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Project.Web.Appliccation.CustomerApp
+namespace Project.Web.Appliccation.ProductApp
 {
-    public class CustomerQueryHandler : IRequestHandler<PageCustomerCommand, PagedResultDto>, IRequestHandler<DetailCuustomerCommand, CustomerDto>
+    public class ProductQueryHandler : IRequestHandler<PageProductCommand, PagedResultDto>, IRequestHandler<DetailCuustomerCommand, ProductDto>
     {
         #region Fileds
-        private readonly IRepository<Customer> _customerRepository;
+        private readonly IRepository<Product> _ProductRepository;
         private readonly IMapper _mapper;
         #endregion
 
         #region Ctor
-        public CustomerQueryHandler(IRepository<Customer> customerRepository, IMapper mapper)
+        public ProductQueryHandler(IRepository<Product> ProductRepository, IMapper mapper)
         {
-            _customerRepository = customerRepository;
+            _ProductRepository = ProductRepository;
             _mapper = mapper;
         }
         #endregion
@@ -42,11 +43,11 @@ namespace Project.Web.Appliccation.CustomerApp
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<PagedResultDto> Handle(PageCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<PagedResultDto> Handle(PageProductCommand request, CancellationToken cancellationToken)
         {
-            var query = _customerRepository.TableNoTracking;
+            var query = _ProductRepository.TableNoTracking;
             var pageResult = await query.ToPageListAsync(request.PageIndex, request.PageSize);
-            pageResult.Data = _mapper.Map<List<CustomersDto>>(pageResult.Data);
+            pageResult.Data = _mapper.Map<List<ProductsDto>>(pageResult.Data);
             return pageResult;
         }
         /// <summary>
@@ -55,10 +56,10 @@ namespace Project.Web.Appliccation.CustomerApp
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<CustomerDto> Handle(DetailCuustomerCommand request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(DetailCuustomerCommand request, CancellationToken cancellationToken)
         {
-            var data = await _customerRepository.GetByIdAsync(request.Id);
-            var result = _mapper.Map<CustomerDto>(data);
+            var data = await _ProductRepository.GetByIdAsync(request.Id);
+            var result = _mapper.Map<ProductDto>(data);
             return result;
         }
         #endregion

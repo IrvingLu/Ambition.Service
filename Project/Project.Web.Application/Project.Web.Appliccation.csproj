@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CustomerApp\Dto\Query\" />
+    <Folder Include="ProductApp\Dto\Query\" />
   </ItemGroup>
 
 </Project>

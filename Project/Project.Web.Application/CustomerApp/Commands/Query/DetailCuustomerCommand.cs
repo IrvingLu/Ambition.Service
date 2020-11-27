@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Project.Core.BaseDto;
-using Project.Web.Application.CustomerApp.Dto;
+using Project.Web.Application.ProductApp.Dto;
 using System;
 
-namespace Project.Web.Application.CustomerApp.Commands
+namespace Project.Web.Application.ProductApp.Commands
 {
-    public class DetailCuustomerCommand : EntityDto, IRequest<CustomerDto>
+    public class DetailCuustomerCommand : EntityDto, IRequest<ProductDto>
     {
 
         public DetailCuustomerCommand(Guid id)
