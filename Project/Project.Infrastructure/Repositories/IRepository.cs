@@ -29,14 +29,6 @@ namespace Project.Infrastructure.Repositories
     /// </summary>
     public interface IRepository<T> where T : Entity
     {
-        IQueryable<T> Table { get; }
-        IQueryable<T> TableNoTracking { get; }
-        Task DeleteAsync(T entity);
-        Task DeleteAsync(IEnumerable<T> entities);
-        Task<T> GetByIdAsync(object id);
-        Task InsertAsync(T entity);
-        Task InsertAsync(IEnumerable<T> entities);
-        Task UpdateAsync(T entity, params string[] excludeColumnNames);
-        Task UpdateAsync(IEnumerable<T> entities);
+       
     }
 }

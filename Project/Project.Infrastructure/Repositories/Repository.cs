@@ -74,7 +74,6 @@ namespace Project.Infrastructure.Repositories
         #endregion
 
         #region Methods
-
         /// <summary>
         /// 详情
         /// </summary>
@@ -84,7 +83,6 @@ namespace Project.Infrastructure.Repositories
         {
             return await Entities.FindAsync(id);
         }
-
         /// <summary>
         /// 新增
         /// </summary>
@@ -96,6 +94,7 @@ namespace Project.Infrastructure.Repositories
 
             try
             {
+                entity.CreateTime = DateTime.Now;
                 Entities.Add(entity);
                 await _context.SaveChangesAsync();
             }
@@ -104,56 +103,18 @@ namespace Project.Infrastructure.Repositories
                 throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
             }
         }
-
         /// <summary>
-        /// 新增
+        /// 多条新增
         /// </summary>
         /// <param name="entities">Entities</param>
-        public async Task InsertAsync(IEnumerable<TEntity> entities)
+        public async Task InsertEnumerableAsync(IEnumerable<TEntity> entities)
         {
             if (entities == null)
                 throw new ArgumentNullException(nameof(entities));
-
             try
             {
-
+                entities = entities.Select(c => { c.CreateTime = DateTime.Now; return c; });
                 Entities.AddRange(entities);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException exception)
-            {
-                throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
-            }
-        }
-        /// <summary>
-        /// 更新
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="excludeColumnNames"></param>
-        /// <returns></returns>
-        public async Task UpdateAsync(TEntity entity, params string[] excludeColumnNames)
-        {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
-            try
-            {
-                if (excludeColumnNames != null && excludeColumnNames.Length > 0)
-                {
-                    if (_context is DbContext dbContext)
-                    {
-                        var dbEntityEntry = dbContext.Entry(entity);
-                        foreach (var columnName in excludeColumnNames)
-                        {
-                            foreach (var property in dbEntityEntry.OriginalValues.Properties)
-                            {
-                                if (!property.Name.Equals(columnName, StringComparison.CurrentCultureIgnoreCase)) continue;
-                                dbEntityEntry.Property(property.Name).IsModified = false;
-                                break;
-                            }
-                        }
-                    }
-                }
-                Entities.Update(entity);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException exception)
@@ -172,6 +133,7 @@ namespace Project.Infrastructure.Repositories
 
             try
             {
+                entity.UpdateTime = DateTime.Now;
                 Entities.Update(entity);
                 await _context.SaveChangesAsync();
             }
@@ -182,16 +144,17 @@ namespace Project.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// 更新
+        /// 多条更新
         /// </summary>
         /// <param name="entities">Entities</param>
-        public async Task UpdateAsync(IEnumerable<TEntity> entities)
+        public async Task UpdateEnumerableAsync(IEnumerable<TEntity> entities)
         {
             if (entities == null)
                 throw new ArgumentNullException(nameof(entities));
 
             try
             {
+                entities = entities.Select(c => { c.UpdateTime = DateTime.Now; return c; });
                 Entities.UpdateRange(entities);
                 await _context.SaveChangesAsync();
             }
@@ -202,7 +165,46 @@ namespace Project.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// 删除
+        /// 主键删除(逻辑删除)
+        /// </summary>
+        /// <param name="entity">Entity</param>
+        public async Task DeleteSoftByIdAsync(object id)
+        {
+            var entity = await Entities.FindAsync(id);
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+            try
+            {
+                entity.IsDelete = true;
+                Entities.Update(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException exception)
+            {
+                throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
+            }
+        }
+        /// <summary>
+        /// 主键删除(物理删除)
+        /// </summary>
+        /// <param name="entity">Entity</param>
+        public async Task DeleteByIdAsync(object id)
+        {
+            var entity = await Entities.FindAsync(id);
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+            try
+            {
+                Entities.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException exception)
+            {
+                throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
+            }
+        }
+        /// <summary>
+        /// 实体删除
         /// </summary>
         /// <param name="entity">Entity</param>
         public async Task DeleteAsync(TEntity entity)
@@ -220,12 +222,11 @@ namespace Project.Infrastructure.Repositories
                 throw new Exception(GetFullErrorTextAndRollbackEntityChanges(exception), exception);
             }
         }
-
         /// <summary>
-        /// 删除
+        /// 多条删除
         /// </summary>
         /// <param name="entities">Entities</param>
-        public async Task DeleteAsync(IEnumerable<TEntity> entities)
+        public async Task DeleteEnumerableAsync(IEnumerable<TEntity> entities)
         {
             if (entities == null)
                 throw new ArgumentNullException(nameof(entities));
@@ -241,6 +242,7 @@ namespace Project.Infrastructure.Repositories
             }
         }
 
+
         #endregion
 
         #region Properties
@@ -249,7 +251,6 @@ namespace Project.Infrastructure.Repositories
         /// 列表
         /// </summary>
         public virtual IQueryable<TEntity> Table => Entities;
-
         /// <summary>
         ///列表 AsNoTracking
         /// </summary>
