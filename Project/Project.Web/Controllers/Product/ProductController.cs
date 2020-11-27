@@ -20,8 +20,6 @@ namespace Project.Web.Controllers.Product
         {
             _mediator = mediator;
         }
-
-
         /// <summary>
         /// 获取列表
         /// </summary>
