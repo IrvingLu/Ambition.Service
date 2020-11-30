@@ -1,7 +1,4 @@
-﻿using Project.Infrastructure.Core.Abstractions;
-using Project.Infrastructure.Core.Entities;
-
-namespace Project.Domain.Product
+﻿namespace Project.Domain.Product
 {
     public class Product: Entity,IAggregateRoot
     {

@@ -1,24 +1,6 @@
-﻿/// ***********************************************************************
-///
-/// =================================
-/// CLR版本    ：4.0.30319.42000
-/// 命名空间    ：Project.Infrastructure.Repositories
-/// 文件名称    ：Repository.cs
-/// =================================
-/// 创 建 者    ：鲁岩奇
-/// 创建日期    ：2020/4/13 11:46:54 
-/// 功能描述    ：
-/// 使用说明    ：
-/// =================================
-/// 修改者    ：
-/// 修改日期    ：
-/// 修改内容    ：
-/// =================================
-///
-/// ***********************************************************************
-
+﻿
 using Microsoft.EntityFrameworkCore;
-using Project.Infrastructure.Core.Entities;
+using Project.Domain;
 using Project.Infrastructure.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Infrastructure.Core.Abstractions
+namespace Project.Domain
 {
     public interface IAggregateRoot
     {

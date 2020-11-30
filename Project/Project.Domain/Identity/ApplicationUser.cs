@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Project.Infrastructure.Core.Abstractions;
+using Project.Domain;
 using System.Collections.Generic;
 
 namespace Project.Infrastructure.Core.Domain.Identity
