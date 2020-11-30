@@ -18,7 +18,7 @@
 /// ***********************************************************************
 
 using Microsoft.EntityFrameworkCore;
-using Project.Core.Entities;
+using Project.Infrastructure.Core.Entities;
 using Project.Infrastructure.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

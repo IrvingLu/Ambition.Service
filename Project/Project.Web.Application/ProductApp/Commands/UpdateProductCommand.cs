@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Project.Core.BaseDto;
+using Project.Infrastructure.Core.BaseDto;
 
 namespace Project.Web.Application.ProductApp.Commands
 {

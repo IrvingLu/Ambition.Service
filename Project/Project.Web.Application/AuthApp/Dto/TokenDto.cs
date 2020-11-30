@@ -1,4 +1,4 @@
-﻿using Project.Core.ApiResult;
+﻿using Project.Infrastructure.Core.ApiResult;
 
 namespace Project.Web.Application.AuthApp.Dto
 {

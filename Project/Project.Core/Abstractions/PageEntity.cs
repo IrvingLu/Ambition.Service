@@ -1,4 +1,4 @@
-﻿namespace Project.Core.Abstractions
+﻿namespace Project.Infrastructure.Core.Abstractions
 {
 
     public abstract class PageEntity

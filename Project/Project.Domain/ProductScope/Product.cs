@@ -1,5 +1,5 @@
-﻿using Project.Core.Abstractions;
-using Project.Core.Entities;
+﻿using Project.Infrastructure.Core.Abstractions;
+using Project.Infrastructure.Core.Entities;
 
 namespace Project.Domain.Product
 {

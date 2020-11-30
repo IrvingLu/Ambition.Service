@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Project.Core.Abstractions;
+using Project.Infrastructure.Core.Abstractions;
 using System.Collections.Generic;
 
-namespace Project.Core.Domain.Identity
+namespace Project.Infrastructure.Core.Domain.Identity
 {
     public class ApplicationUser : IdentityUser
     {

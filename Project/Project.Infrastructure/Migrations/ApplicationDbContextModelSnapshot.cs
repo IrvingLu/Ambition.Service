@@ -119,7 +119,7 @@ namespace Project.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Project.Core.Domain.Identity.ApplicationRole", b =>
+            modelBuilder.Entity("Project.Infrastructure.Core.Domain.Identity.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -145,7 +145,7 @@ namespace Project.Infrastructure.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Project.Core.Domain.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("Project.Infrastructure.Core.Domain.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -234,7 +234,7 @@ namespace Project.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Project.Core.Domain.Identity.ApplicationRole", null)
+                    b.HasOne("Project.Infrastructure.Core.Domain.Identity.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -243,7 +243,7 @@ namespace Project.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Project.Core.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("Project.Infrastructure.Core.Domain.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -252,7 +252,7 @@ namespace Project.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Project.Core.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("Project.Infrastructure.Core.Domain.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -261,13 +261,13 @@ namespace Project.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Project.Core.Domain.Identity.ApplicationRole", null)
+                    b.HasOne("Project.Infrastructure.Core.Domain.Identity.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Project.Core.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("Project.Infrastructure.Core.Domain.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -276,16 +276,16 @@ namespace Project.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Project.Core.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("Project.Infrastructure.Core.Domain.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Project.Core.Domain.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("Project.Infrastructure.Core.Domain.Identity.ApplicationUser", b =>
                 {
-                    b.OwnsOne("Project.Core.Domain.Identity.Address", "Address", b1 =>
+                    b.OwnsOne("Project.Infrastructure.Core.Domain.Identity.Address", "Address", b1 =>
                         {
                             b1.Property<string>("ApplicationUserId")
                                 .HasColumnType("varchar(255) CHARACTER SET utf8mb4");

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Project.Core.Domain.Identity;
+using Project.Infrastructure.Core.Domain.Identity;
 using Project.Infrastructure.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;

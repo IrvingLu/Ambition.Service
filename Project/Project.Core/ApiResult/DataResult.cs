@@ -1,4 +1,4 @@
-﻿namespace Project.Core.ApiResult
+﻿namespace Project.Infrastructure.Core.ApiResult
 {
     public class DataResult : BaseResult
     {

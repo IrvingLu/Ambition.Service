@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Project.Core.Abstractions;
-using Project.Core.BaseDto;
-using Project.Core.Entities;
+using Project.Infrastructure.Core.Abstractions;
+using Project.Infrastructure.Core.BaseDto;
+using Project.Infrastructure.Core.Entities;
 
 namespace Project.Web.Application.ProductApp.Commands
 

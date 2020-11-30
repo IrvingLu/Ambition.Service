@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Project.Core.Entities
+namespace Project.Infrastructure.Core.Entities
 {
     public abstract class Entity
     {

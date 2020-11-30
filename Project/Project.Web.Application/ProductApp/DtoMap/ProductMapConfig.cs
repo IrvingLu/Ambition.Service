@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Project.Core.Domain;
+using Project.Infrastructure.Core.Domain;
 using Project.Domain.Product;
 using Project.Web.Application.ProductApp.Commands;
 using Project.Web.Application.ProductApp.Dto;

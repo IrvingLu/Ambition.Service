@@ -8,8 +8,8 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Project.Core.BaseDto;
-using Project.Core.Domain;
+using Project.Infrastructure.Core.BaseDto;
+using Project.Infrastructure.Core.Domain;
 using Project.Domain.Product;
 using Project.Infrastructure.Repositories;
 using Project.Web.Application.ProductApp.Commands;

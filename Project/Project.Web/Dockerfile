@@ -9,7 +9,7 @@ WORKDIR /src
 COPY ["Project/Project.Web/Project.Web.csproj", "Project/Project.Web/"]
 COPY ["Project/Project.Web.Application/Project.Web.Appliccation.csproj", "Project/Project.Web.Application/"]
 COPY ["Project/Project.Infrastructure/Project.Infrastructure.csproj", "Project/Project.Infrastructure/"]
-COPY ["Project/Project.Core/Project.Core.csproj", "Project/Project.Core/"]
+COPY ["Project/Project.Infrastructure.Core/Project.Infrastructure.Core.csproj", "Project/Project.Infrastructure.Core/"]
 COPY ["Project/Project.Domain/Project.Domain.csproj", "Project/Project.Domain/"]
 RUN dotnet restore "Project/Project.Web/Project.Web.csproj"
 COPY . .

@@ -1,14 +1,14 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
-using Project.Core.Configuration;
+using Project.Infrastructure.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Core.Mongodb
+namespace Project.Infrastructure.Core.Mongodb
 {
     public static class MongodbHelper<T> where T : class, new()
     {
