@@ -7,7 +7,7 @@ namespace Project.Infrastructure.Core.Redis
     public static class CacheDefaults
     {
         /// <summary>
-        /// Gets the default cache time in minutes
+        /// 默认过期时间
         /// </summary>
         public static int CacheTime => 86400;
     }

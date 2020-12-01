@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Project.Web.Core.Extensions
 {
+    /// <summary>
+    /// linq扩展
+    /// </summary>
     public static class QueryableExtensions
     {
         /// <summary>
