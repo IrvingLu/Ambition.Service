@@ -9,8 +9,8 @@ using System;
 
 namespace Project.Infrastructure.Core.BaseDto
 {
-    public  class EntityDto<TKey>
+    public  class EntityDto
     {
-        public TKey Id { get; set; }
+        public Guid Id { get; set; }
     }
 }
