@@ -69,7 +69,7 @@ namespace Project.Web
             services.AddSignalR();//SignalR
             services.AddApiVersion();//api°æ±¾
             services.AddController();//api¿ØÖÆÆ÷
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+            services.AddIdentityCore<ApplicationUser>()
                   .AddEntityFrameworkStores<ApplicationDbContext>()
                   .AddDefaultTokenProviders();//Identity ×¢Èë
         }
