@@ -17,13 +17,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Project.Web.Application\Project.Web.Appliccation.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\ProductApp\Dto\Query\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Project.Infrastructure\Project.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>

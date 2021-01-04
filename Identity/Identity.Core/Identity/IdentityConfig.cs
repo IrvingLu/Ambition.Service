@@ -14,12 +14,27 @@ namespace Identity.Service.Identity
                 new IdentityResources.Profile(),
             };
         }
-        // scopes define the API resources in your system
+        /// <summary>
+        /// api范围
+        /// </summary>
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
             {
-                new ApiResource("api", "My API")
+                new ApiResource("api", "api"){
+                    Scopes={ "api"}
+                }
+            };
+        }
+        /// <summary>
+        /// id4 4.x版本新增
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<ApiScope> GetApiScope()
+        {
+            return new List<ApiScope>
+            {
+                new ApiScope("api")
             };
         }
         public static IEnumerable<Client> GetClients()

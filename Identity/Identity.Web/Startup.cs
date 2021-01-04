@@ -25,7 +25,7 @@ namespace Identity.Web
         {
             services.AddDbContext<ApplicationDbContext>(
                options => options
-                   .UseMySql(Configuration.GetConnectionString("MySql"), new MySqlServerVersion(new Version(8, 0, 21))),ServiceLifetime.Transient);
+                   .UseMySql(Configuration.GetConnectionString("MySql"), new MySqlServerVersion(new Version(8, 0, 21))), ServiceLifetime.Transient);
             //身份验证配置
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -36,6 +36,7 @@ namespace Identity.Web
                     .AddDeveloperSigningCredential()
                     .AddInMemoryIdentityResources(IdentityConfig.GetIdentityResources())
                     .AddInMemoryApiResources(IdentityConfig.GetApiResources())
+                    .AddInMemoryApiScopes(IdentityConfig.GetApiScope())
                     .AddInMemoryClients(IdentityConfig.GetClients())
                     .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                     .AddProfileService<ProfileService>();

@@ -33,6 +33,5 @@ namespace Project.Web.Controllers.Auth
             }
             return Ok(new TokenDto { Code = (int)HttpStatusCode.OK, Message = "验证通过", AccessToken = result.AccessToken, TokenType = result.TokenType});
         }
-
     }
 }
