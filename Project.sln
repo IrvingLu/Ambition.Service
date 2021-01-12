@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Web", "Identity\Identity.Web\Identity.Web.csproj", "{63C4848A-A5F2-4C39-B4D7-FEEF264DFF32}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project..Core", "Project\Project.Core\Project..Core.csproj", "{15E9AB9C-FCA5-474A-AAFB-BAE3F0488BB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Core", "Project\Project.Core\Project.Core.csproj", "{15E9AB9C-FCA5-474A-AAFB-BAE3F0488BB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Infrastructure", "Project\Project.Infrastructure\Project.Infrastructure.csproj", "{0B7C0FBF-4736-4E77-873E-F8F82F4D279D}"
 EndProject

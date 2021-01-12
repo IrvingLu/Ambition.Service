@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using System.IO;
 
-namespace Project.Web.Infrastructure.StartupExtensions
+namespace Project.Web.StartupExtensions
 {
     public static class ApplicationBuilderExtensions
     {

@@ -13,7 +13,7 @@ using Project.Infrastructure.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
-namespace Project.Web.Infrastructure.StartupExtensions
+namespace Project.Web.StartupExtensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -73,6 +73,7 @@ namespace Project.Web.Infrastructure.StartupExtensions
                 options.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddIdentityServerAuthentication(options =>
             {
                 options.Authority = configuration.GetSection("ApplicationConfiguration").GetSection("IdentityAddress").Value;

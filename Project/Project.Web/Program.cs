@@ -21,7 +21,7 @@ namespace Project.Web
                     {
                         options.Limits.MinRequestBodyDataRate = null;//½â¾ö
                         options.AddServerHeader = false;
-                        options.Listen(IPAddress.Any, 80);
+                        options.Listen(IPAddress.Any, 5001);
                     });
                 }).UseServiceProviderFactory(new AutofacServiceProviderFactory());
     }

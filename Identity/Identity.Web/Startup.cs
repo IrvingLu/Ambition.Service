@@ -48,6 +48,7 @@ namespace Identity.Web
         {
             app.UseHealthChecks("/health");
             app.UseIdentityServer();
+
         }
 
     }

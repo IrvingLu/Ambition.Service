@@ -10,12 +10,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
-using Project.Infrastructure;
 using Project.Core.Domain.Identity;
+using Project.Infrastructure;
 using Project.Infrastructure.EntityFrameworkCore;
 using Project.Web.Appliccation.SignalrRHub;
 using Project.Web.Infrastructure;
-using Project.Web.Infrastructure.StartupExtensions;
+using Project.Web.StartupExtensions;
 using System.Text;
 
 namespace Project.Web
@@ -59,18 +59,19 @@ namespace Project.Web
             //    TablePrefix = "Hangfire"
             //})));
             services.AddConfig(Configuration);//配置文件
-            services.AddApplicationDbContext(Configuration);//DbContext上下文
+            //services.AddApplicationDbContext(Configuration);//DbContext上下文
             services.AddIdentityOptions();//身份认证配置
             services.AddAutoMapper(typeof(Startup));//automapper
             services.AddMediatR(typeof(Startup));//CQRS
             services.AddHealthChecks();//健康检查
-            services.AddAuthService(Configuration);//认证服务
+        
             services.AddSignalR();//SignalR
             services.AddApiVersion();//api版本
             services.AddController();//api控制器
-            services.AddIdentityCore<ApplicationUser>()
+            services.AddIdentity<ApplicationUser,ApplicationRole>()
                   .AddEntityFrameworkStores<ApplicationDbContext>()
                   .AddDefaultTokenProviders();//Identity 注入
+            services.AddAuthService(Configuration);//认证服务
         }
         /// <summary>
         /// 中间件管道
@@ -96,10 +97,10 @@ namespace Project.Web
                 endpoints.MapControllers();
                 endpoints.MapHub<ProjectHub>("/project").RequireCors(t => t.WithOrigins(new string[] { "null" }).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             });
-            app.UseHangfireServer(new BackgroundJobServerOptions
-            {
-                WorkerCount = 1
-            });
+            //app.UseHangfireServer(new BackgroundJobServerOptions
+            //{
+            //    WorkerCount = 1
+            //});
             RegisterJobs();
             //初始化数据
             DbContextSeed.SeedAsync(app.ApplicationServices).Wait();

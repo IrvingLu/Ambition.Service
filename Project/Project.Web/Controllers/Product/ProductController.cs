@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project.Core;
+using Project.Core.Extensions;
 using Project.Web.Application.ProductApp.Commands;
 using System;
 using System.Net;
@@ -12,7 +14,7 @@ namespace Project.Web.Controllers.Product
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ProductController : BaseController
     {
         private readonly IMediator _mediator;
@@ -27,6 +29,7 @@ namespace Project.Web.Controllers.Product
         [HttpGet("Products")]
         public async Task<IActionResult> GetAllAsync([FromQuery]PageProductCommand  pageProductCommand)
         {
+            var id = User.GetUserId();
            var result= await _mediator.Send(pageProductCommand);
             return Ok(new DataListResult((int)HttpStatusCode.OK, "Success",result.Data,result.TotalCount));
         }

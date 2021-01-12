@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System.Net;
 
 namespace Identity.Web
 {
@@ -15,6 +16,13 @@ namespace Identity.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseKestrel(
+                    options =>
+                    {
+                        options.Limits.MinRequestBodyDataRate = null;//½â¾ö
+                        options.AddServerHeader = false;
+                        options.Listen(IPAddress.Any, 5000);
+                    });
                 });
     }
 }

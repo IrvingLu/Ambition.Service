@@ -1,13 +1,22 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Project.Core.Domain.Identity;
 using Project.Domain.Product;
 using Project.Infrastructure.EntityTypeConfiguration;
+using System;
 
 namespace Project.Infrastructure.EntityFrameworkCore
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
+        public IConfiguration _configuration { get; }
+        public ApplicationDbContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){
         
         }
@@ -16,14 +25,25 @@ namespace Project.Infrastructure.EntityFrameworkCore
         public DbSet<Product> Product { get; set; }
         #endregion
 
+        #region 数据库配置
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseMySql(_configuration.GetConnectionString("MySql"), new MySqlServerVersion(new Version(8, 0, 21))).UseLoggerFactory(efLogger);
+            base.OnConfiguring(optionsBuilder);
+        }
+        public static readonly ILoggerFactory efLogger = LoggerFactory.Create(builder =>
+        {
+            builder.AddFilter((category, level) => category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information).AddConsole();
+        });
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region 注册领域模型与数据库的映射关系
-            modelBuilder.ApplyConfiguration(new ProductEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new ReservationEntityTypeConfiguration());
             #endregion
             base.OnModelCreating(modelBuilder);
         }
+        #endregion
 
-   
+
     }
 }
