@@ -27,6 +27,7 @@ namespace Project.Web.StartupExtensions
         public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.ConfigureStartupConfig<MongodbHostConfig>(configuration.GetSection("MongodbHostConfig"));
+            services.ConfigureStartupConfig<OssClientConfig>(configuration.GetSection("OssClientConfig"));
             return services;
         }
         /// <summary>

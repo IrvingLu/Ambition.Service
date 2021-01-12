@@ -1,6 +1,8 @@
 ﻿using Autofac;
+using Project.Infrastructure.Dapper;
 using Project.Infrastructure.EntityFrameworkCore;
 using Project.Infrastructure.Repositories;
+using Project.Web.Application.File;
 using Project.Web.Application.ProductApp;
 using System.Reflection;
 using Module = Autofac.Module;
@@ -18,11 +20,15 @@ namespace Project.Web.Infrastructure
         /// </summary>
         protected override void Load(ContainerBuilder builder)
         {
-            //data
+            #region 数据相关注入
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             builder.RegisterType<ApplicationDbContext>().AsSelf();
-            //注入command
-            builder.RegisterAssemblyTypes(typeof(ProductCommandHandler).GetTypeInfo().Assembly);
+            #endregion
+
+            #region 基础服务
+            builder.RegisterType<DapperQuery>().As<IDapperQuery>().InstancePerLifetimeScope();
+            builder.RegisterType<OssService>().As<IOssService>().InstancePerLifetimeScope();
+            #endregion
         }
     }
 }
