@@ -5,11 +5,17 @@ using Project.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Project.Core.Mongodb
 {
+    /// <summary>
+    /// 功能描述    ：Mongodb
+    /// 创 建 者    ：鲁岩奇
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/1/12 9:40:56 
+    /// </summary>
     public static class MongodbHelper<T> where T : class, new()
     {
         #region +Add 添加一条数据

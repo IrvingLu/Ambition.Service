@@ -10,9 +10,12 @@ using System.Threading.Tasks;
 namespace Project.Infrastructure.Repositories
 {
     /// <summary>
-    /// Represents the Entity Framework repository
+    /// 功能描述    ：仓储类
+    /// 创 建 者    ：鲁岩奇
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/1/12 9:40:56 
     /// </summary>
-    /// <typeparam name="TEntity">Entity type</typeparam>
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         #region Fields

@@ -5,6 +5,13 @@ using System.Collections.Generic;
 
 namespace Project.Domain
 {
+    /// <summary>
+    /// 功能描述    ：基础实体
+    /// 创 建 者    ：鲁岩奇
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/1/12 9:40:56 
+    /// </summary>
     public abstract class Entity
     {
         /// <summary>

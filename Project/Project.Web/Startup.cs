@@ -1,6 +1,5 @@
 using Autofac;
 using AutoMapper;
-using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

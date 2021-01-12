@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Project.Core.BaseDto
+﻿namespace Project.Core.BaseDto
 {
     public class PagedResultDto
     {

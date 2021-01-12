@@ -9,6 +9,13 @@ namespace Project.Web.Infrastructure
 {
     public class DependencyRegistrar : Module
     {
+        /// <summary>
+        /// 功能描述    ：autofac依赖注入配置
+        /// 创 建 者    ：鲁岩奇
+        /// 创建日期    ：2021/1/12 9:40:56 
+        /// 最后修改者  ：Administrator
+        /// 最后修改日期：2021/1/12 9:40:56 
+        /// </summary>
         protected override void Load(ContainerBuilder builder)
         {
             //data

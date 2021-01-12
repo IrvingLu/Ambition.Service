@@ -1,8 +1,5 @@
 ﻿using MongoDB.Driver;
 using Project.Core.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Project.Core.Mongodb
 {

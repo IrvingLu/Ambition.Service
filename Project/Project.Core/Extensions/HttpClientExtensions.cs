@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Project.Core.Tools;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -11,7 +9,11 @@ using System.Threading.Tasks;
 namespace Project.Core.Extensions
 {
     /// <summary>
-    /// httpclient扩展封装
+    /// 功能描述    ：HttpClient扩展
+    /// 创 建 者    ：鲁岩奇
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/1/12 9:40:56 
     /// </summary>
     public static class HttpClientExtensions
     {
