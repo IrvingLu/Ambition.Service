@@ -3,8 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Project.Core.Domain.Identity;
+using Project.Domain;
 using Project.Domain.Product;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Project.Infrastructure.EntityFrameworkCore
 {

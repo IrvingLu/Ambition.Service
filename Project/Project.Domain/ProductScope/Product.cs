@@ -14,10 +14,7 @@
         /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// 产品图片地址
-        /// </summary>
-        public string PicPath { get; set; }
+
     }
 
 
