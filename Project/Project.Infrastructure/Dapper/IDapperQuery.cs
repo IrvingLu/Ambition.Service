@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Project.Infrastructure.Data.Dapper
+namespace Project.Infrastructure.Dapper
 {
     /// <summary>
     /// 功能描述    ：IDapperQuery  

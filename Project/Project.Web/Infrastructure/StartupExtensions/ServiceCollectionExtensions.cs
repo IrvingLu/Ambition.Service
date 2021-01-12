@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
-using Project.Infrastructure.Core.Configuration;
+using Project.Core.Configuration;
 using Project.Infrastructure.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;

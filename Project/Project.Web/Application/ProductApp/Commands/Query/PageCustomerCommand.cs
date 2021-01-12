@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Project.Domain;
-using Project.Infrastructure.Core.BaseDto;
+using Project.Core.BaseDto;
 
 namespace Project.Web.Application.ProductApp.Commands
 

@@ -7,7 +7,7 @@
 
 using AutoMapper;
 using MediatR;
-using Project.Infrastructure.Core.Domain;
+using Project.Core.Domain;
 using Project.Domain.Product;
 using Project.Infrastructure.Repositories;
 using Project.Web.Application.ProductApp.Commands;

@@ -1,4 +1,4 @@
-﻿using Project.Infrastructure.Core.BaseDto;
+﻿using Project.Core.BaseDto;
 using System;
 
 namespace Project.Web.Application.ProductApp.Dto

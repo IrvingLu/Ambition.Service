@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Project.Infrastructure.Core.Tools;
+using Project.Core.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Project.Infrastructure.Core.Extensions
+namespace Project.Core.Extensions
 {
     /// <summary>
     /// httpclient扩展封装

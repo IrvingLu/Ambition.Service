@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Project.Infrastructure.Core.Domain;
 using Project.Domain.Product;
 
 namespace Project.Infrastructure.EntityTypeConfiguration

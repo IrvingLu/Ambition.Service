@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Project.Infrastructure.Core.BaseDto
+namespace Project.Core.BaseDto
 {
     public  class EntityDto
     {

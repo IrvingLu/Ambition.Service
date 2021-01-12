@@ -1,10 +1,10 @@
 ﻿using MongoDB.Driver;
-using Project.Infrastructure.Core.Configuration;
+using Project.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project.Infrastructure.Core.Mongodb
+namespace Project.Core.Mongodb
 {
     public static class MongodbClient<T> where T : class
     {

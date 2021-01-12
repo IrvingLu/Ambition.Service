@@ -1,7 +1,6 @@
 using Autofac;
 using AutoMapper;
 using Hangfire;
-using Hangfire.MySql.Core;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,8 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
-using Project.Infrastructure.Core.Domain.Identity;
 using Project.Infrastructure;
+using Project.Core.Domain.Identity;
 using Project.Infrastructure.EntityFrameworkCore;
 using Project.Web.Appliccation.SignalrRHub;
 using Project.Web.Infrastructure;

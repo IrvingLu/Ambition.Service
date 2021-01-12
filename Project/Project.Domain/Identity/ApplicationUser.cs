@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Project.Domain;
 using System.Collections.Generic;
 
-namespace Project.Infrastructure.Core.Domain.Identity
+namespace Project.Core.Domain.Identity
 {
     public class ApplicationUser : IdentityUser
     {

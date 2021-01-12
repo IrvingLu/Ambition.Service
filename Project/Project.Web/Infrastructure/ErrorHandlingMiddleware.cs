@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Project.Infrastructure.Core.ApiResult;
+using Project.Core;
 using System;
 using System.Threading.Tasks;
 

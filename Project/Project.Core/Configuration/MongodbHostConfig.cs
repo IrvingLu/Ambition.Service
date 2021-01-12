@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project.Infrastructure.Core.Configuration
+namespace Project.Core.Configuration
 {
    public class MongodbHostConfig
     {

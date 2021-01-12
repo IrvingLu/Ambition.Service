@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text;
 
-namespace Project.Infrastructure.Core.Tools
+namespace Project.Core.Tools
 {
     public static class Helper
     {

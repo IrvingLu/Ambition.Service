@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Infrastructure.Data.Dapper
+namespace Project.Infrastructure.Dapper
 {
     /// <summary>
     /// 功能描述    ：Dapper封装

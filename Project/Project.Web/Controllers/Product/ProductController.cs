@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Project.Infrastructure.Core.ApiResult;
+using Project.Core;
 using Project.Web.Application.ProductApp.Commands;
 using System;
 using System.Net;

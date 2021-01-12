@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Project.Infrastructure.Core.BaseDto;
+using Project.Core.BaseDto;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
