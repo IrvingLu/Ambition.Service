@@ -1,4 +1,4 @@
-﻿using Identity.Core.Domain;
+﻿using Identity.Web.Domain;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Identity;

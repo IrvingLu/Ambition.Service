@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Project.Core.Domain.Identity;
 using Project.Domain.Product;
-using Project.Infrastructure.EntityTypeConfiguration;
 using System;
 
 namespace Project.Infrastructure.EntityFrameworkCore
