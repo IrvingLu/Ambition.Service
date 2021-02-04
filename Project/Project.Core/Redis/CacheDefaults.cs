@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Project.Core.Redis
+﻿namespace Project.Core.Redis
 {
     public static class CacheDefaults
     {

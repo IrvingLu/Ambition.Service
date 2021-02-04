@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Project.Core.Configuration
+﻿namespace Project.Core.Configuration
 {
     /// <summary>
     /// 功能描述    ：OssClientConfig  
@@ -13,7 +7,7 @@ namespace Project.Core.Configuration
     /// 最后修改者  ：Administrator
     /// 最后修改日期：2021/1/12 13:38:43 
     /// </summary>
-   public class OssClientConfig
+    public class OssClientConfig
     {
         public string EndPoint { get; set; }
         public string AccessKeyId { get; set; }

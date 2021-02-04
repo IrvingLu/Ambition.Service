@@ -1,7 +1,14 @@
 ﻿using Project.Core;
 
-namespace Project.Web.Application.AuthApp.Dto
+namespace Project.Web.Application.Auth.ReturnDto
 {
+    /// <summary>
+    /// 功能描述    ：token
+    /// 创 建 者    ：鲁岩奇
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/1/12 9:40:56 
+    /// </summary>
     public class TokenDto:BaseResult
     {
         /// <summary>

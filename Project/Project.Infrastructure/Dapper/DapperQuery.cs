@@ -8,7 +8,7 @@ namespace Project.Infrastructure.Dapper
 {
     /// <summary>
     /// 功能描述    ：Dapper封装
-    /// 创 建 者    ：鲁岩奇
+    /// 创 建 者    ：Seven
     /// 创建日期    ：2020/12/29 16:33:12 
     /// 最后修改者  ：Administrator
     /// 最后修改日期：2020/12/29 16:33:12 
@@ -26,12 +26,11 @@ namespace Project.Infrastructure.Dapper
         /// 查询
         /// </summary>
         /// <param name="sql">查询的sql</param>
-        /// <param name="param">替换参数</param>
         /// <returns></returns>
-        public async Task<IEnumerable<dynamic>> QueryAsync(string sql, object param)
+        public async Task<int> ExecuteAsync(string sql)
         {
             using MySqlConnection con = new MySqlConnection(connectionString);
-            return await con.QueryAsync(sql);
+            return await con.ExecuteAsync(sql);
         }
         /// <summary>
         /// 查询列表带参数

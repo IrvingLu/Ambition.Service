@@ -23,7 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\ProductApp\Dto\Query\" />
+    <Folder Include="Application\Common\Sms\" />
+    <Folder Include="Application\ProductApp\Command\ReturnDto\" />
   </ItemGroup>
 
   <ItemGroup>

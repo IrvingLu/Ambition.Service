@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using Project.Core.Configuration;
-using Project.Infrastructure.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
@@ -17,30 +15,48 @@ namespace Project.Web.StartupExtensions
 {
     /// <summary>
     /// 功能描述    ：服务配置
-    /// 创 建 者    ：鲁岩奇
+    /// 创 建 者    ：Seven
     /// 创建日期    ：2021/1/12 9:40:56 
     /// 最后修改者  ：Administrator
     /// 最后修改日期：2021/1/12 9:40:56 
     /// </summary>
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.ConfigureStartupConfig<MongodbHostConfig>(configuration.GetSection("MongodbHostConfig"));
-            services.ConfigureStartupConfig<OssClientConfig>(configuration.GetSection("OssClientConfig"));
-            return services;
-        }
         /// <summary>
-        /// 注入上下文
+        /// settings配置
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(
-                options => options
-                    .UseMySql(configuration.GetConnectionString("MySql"), new MySqlServerVersion(new Version(8, 0, 21))), ServiceLifetime.Transient);
+            services.ConfigureStartupConfig<MongodbHostConfig>(configuration.GetSection("MongodbHostConfig"));
+            services.ConfigureStartupConfig<OssClientConfig>(configuration.GetSection("OssClientConfig"));
+            services.ConfigureStartupConfig<AlibabaSmsConfig>(configuration.GetSection("AlibabaSmsConfig"));
+            return services;
+        }
+        private static TConfig ConfigureStartupConfig<TConfig>(this IServiceCollection services, IConfiguration configuration) where TConfig : class, new()
+        {
+            //创建配置
+            var config = new TConfig();
+            //绑定
+            configuration.Bind(config);
+            //注册
+            services.AddSingleton(config);
+            return config;
+        }
+
+        public static IServiceCollection AddCorsConfig(this IServiceCollection services)
+        {
+            //跨域配置
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSameDomain",
+                    policy => policy.SetIsOriginAllowed(origin => true)
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader()
+                                    .AllowCredentials());
+            });
             return services;
         }
         /// <summary>
@@ -48,7 +64,8 @@ namespace Project.Web.StartupExtensions
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection AddIdentityOptions(this IServiceCollection services) {
+        public static IServiceCollection AddIdentityOptions(this IServiceCollection services)
+        {
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -106,7 +123,6 @@ namespace Project.Web.StartupExtensions
             });
             return services;
         }
-
         /// <summary>
         /// 接口版本注入
         /// </summary>
@@ -126,7 +142,6 @@ namespace Project.Web.StartupExtensions
             });
             return services;
         }
-
         /// <summary>
         /// 控制器注入
         /// </summary>
@@ -145,15 +160,9 @@ namespace Project.Web.StartupExtensions
             });
             return services;
         }
-        public static TConfig ConfigureStartupConfig<TConfig>(this IServiceCollection services, IConfiguration configuration) where TConfig : class, new()
-        {
-            //创建配置
-            var config = new TConfig();
-            //绑定
-            configuration.Bind(config);
-            //注册
-            services.AddSingleton(config);
-            return config;
-        }
+
+
+
+
     }
 }

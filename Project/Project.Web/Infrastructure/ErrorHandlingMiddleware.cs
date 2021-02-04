@@ -89,12 +89,4 @@ namespace Project.Web.Infrastructure
             return Task.CompletedTask;
         }
     }
-    //扩展方法
-    public static class ErrorHandlingExtensions
-    {
-        public static IApplicationBuilder UseErrorHandling(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<ErrorHandlingMiddleware>();
-        }
-    }
 }

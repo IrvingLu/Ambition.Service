@@ -8,7 +8,7 @@ namespace Project.Infrastructure.Repositories
 {
     /// <summary>
     /// 功能描述    ：仓储接口
-    /// 创 建 者    ：鲁岩奇
+    /// 创 建 者    ：Seven
     /// 创建日期    ：2021/1/12 9:40:56 
     /// 最后修改者  ：Administrator
     /// 最后修改日期：2021/1/12 9:40:56 
@@ -17,7 +17,6 @@ namespace Project.Infrastructure.Repositories
     {
         IQueryable<TEntity> Table { get; }
         IQueryable<TEntity> TableNoTracking { get; }
-
         Task DeleteAsync(TEntity entity);
         Task DeleteByIdAsync(object id);
         Task DeleteEnumerableAsync(IEnumerable<TEntity> entities);

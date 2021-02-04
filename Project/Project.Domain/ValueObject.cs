@@ -20,14 +20,11 @@ namespace Project.Domain
             }
             return left is null || left.Equals(right);
         }
-
         protected static bool NotEqualOperator(ValueObject left, ValueObject right)
         {
             return !(EqualOperator(left, right));
         }
-
         protected abstract IEnumerable<object> GetAtomicValues();
-
         public override bool Equals(object obj)
         {
             if (obj == null || obj.GetType() != GetType())

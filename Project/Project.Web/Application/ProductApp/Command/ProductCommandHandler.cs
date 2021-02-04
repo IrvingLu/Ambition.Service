@@ -1,21 +1,20 @@
-﻿/************************************************************************
-*本页作者    ：鲁帅
-*创建日期    ：2020/11/10 9:19:29 
-*功能描述    ：命令Handler
-*使用说明    ：
-***********************************************************************/
-
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
-using Project.Core.Domain;
 using Project.Domain.Product;
 using Project.Infrastructure.Repositories;
-using Project.Web.Application.ProductApp.Commands;
+using Project.Web.Application.ProductApp.Command.RequestCommandDto;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Project.Web.Application.ProductApp
 {
+    /// <summary>
+    /// 功能描述    ：命令
+    /// 创 建 者    ：Seven
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/1/12 9:40:56 
+    /// </summary>
     public class ProductCommandHandler : IRequestHandler<CreateProductCommand, Unit>, IRequestHandler<UpdateProductCommand, Unit>, IRequestHandler<DeleteProductCommand, Unit>
     {
         #region Fileds

@@ -9,7 +9,7 @@ namespace Project.Infrastructure
 {
     /// <summary>
     /// 功能描述    ：初始化数据
-    /// 创 建 者    ：鲁岩奇
+    /// 创 建 者    ：Seven
     /// 创建日期    ：2021/1/12 9:40:56 
     /// 最后修改者  ：Administrator
     /// 最后修改日期：2021/1/12 9:40:56 
@@ -51,9 +51,9 @@ namespace Project.Infrastructure
         /// <returns></returns>
         private static async Task<ApplicationUser> CreateDefaultUser(UserManager<ApplicationUser> userManager)
         {
-            var user = new ApplicationUser { Email = "Project@shengshi.com", UserName = "admin" };
-            await userManager.CreateAsync(user, "shengshi");
-            var createdUser = await userManager.FindByEmailAsync("Project@shengshi.com");
+            var user = new ApplicationUser { Email = "18504029848@163.com", UserName = "admin" };
+            await userManager.CreateAsync(user, "meiyoumima");
+            var createdUser = await userManager.FindByEmailAsync("18504029848@163.com");
             return createdUser;
         }
         /// <summary>

@@ -3,17 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Project.Core.Domain.Identity;
-using Project.Domain;
 using Project.Domain.Product;
 using System;
-using System.Linq;
-using System.Reflection;
 
 namespace Project.Infrastructure.EntityFrameworkCore
 {
     /// <summary>
     /// 功能描述    ：数据库上下文
-    /// 创 建 者    ：鲁岩奇
+    /// 创 建 者    ：Seven
     /// 创建日期    ：2021/1/12 9:40:56 
     /// 最后修改者  ：Administrator
     /// 最后修改日期：2021/1/12 9:40:56 

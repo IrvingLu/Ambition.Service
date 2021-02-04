@@ -30,8 +30,7 @@ namespace Identity.Web.Validator
         {
             var phone = context.Request.Raw.Get("phone");///手机号
             var code = context.Request.Raw.Get("code");///验证码
-                                                       ///判断验证码是否准确
-            var smsCode = await RedisHelper.GetAsync(phone);//获取手机的短信验证码
+            var smsCode = await RedisHelper.GetAsync(phone);///获取手机的短信验证码
             if (string.IsNullOrEmpty(smsCode))
             {
                 context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "验证码过期或者未发送验证码");
@@ -48,6 +47,7 @@ namespace Identity.Web.Validator
             if (user != null)
             {
                 context.Result = new GrantValidationResult(user.Id.ToString(), GrantType, IdentityConfig.GetUserClaim(user));
+                await RedisHelper.DelAsync(phone);///登录成功删除验证码
             }
             ///不存在则创建用户，并返回token
             else
@@ -61,16 +61,13 @@ namespace Identity.Web.Validator
                 if (result.Succeeded)
                 {
                     context.Result = new GrantValidationResult(user.Id.ToString(), GrantType, IdentityConfig.GetUserClaim(newUser));
-
+                    await RedisHelper.DelAsync(phone);///登录成功删除验证码
                 }
                 else
                 {
                     context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "创建默认用户失败");
-
                 }
             }
-
-
         }
     }
 }

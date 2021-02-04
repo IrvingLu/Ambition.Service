@@ -7,13 +7,13 @@
 
 using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Project.Core.BaseDto;
-using Project.Core.Domain;
 using Project.Domain.Product;
 using Project.Infrastructure.Repositories;
-using Project.Web.Application.ProductApp.Commands;
 using Project.Web.Application.ProductApp.Dto;
+using Project.Web.Application.ProductApp.Query.Commands;
+using Project.Web.Application.ProductApp.Query.RequestCommandDto;
+using Project.Web.Application.ProductApp.Query.ReturnDto;
 using Project.Web.Core.Extensions;
 using System.Collections.Generic;
 using System.Threading;
@@ -21,7 +21,14 @@ using System.Threading.Tasks;
 
 namespace Project.Web.Appliccation.ProductApp
 {
-    public class ProductQueryHandler : IRequestHandler<PageProductCommand, PagedResultDto>, IRequestHandler<DetailCuustomerCommand, ProductDto>
+    /// <summary>
+    /// 功能描述    ：查询逻辑方法
+    /// 创 建 者    ：Seven
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/1/12 9:40:56 
+    /// </summary>
+    public class ProductQueryHandler : IRequestHandler<ProductsCommand, PagedResultDto>, IRequestHandler<ProductCommand, ProductDto>
     {
         #region Fileds
         private readonly IRepository<Product> _ProductRepository;
@@ -43,7 +50,7 @@ namespace Project.Web.Appliccation.ProductApp
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<PagedResultDto> Handle(PageProductCommand request, CancellationToken cancellationToken)
+        public async Task<PagedResultDto> Handle(ProductsCommand request, CancellationToken cancellationToken)
         {
             var query = _ProductRepository.TableNoTracking;
             var pageResult = await query.ToPageListAsync(request.PageIndex, request.PageSize);
@@ -56,7 +63,7 @@ namespace Project.Web.Appliccation.ProductApp
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<ProductDto> Handle(DetailCuustomerCommand request, CancellationToken cancellationToken)
+        public async Task<ProductDto> Handle(ProductCommand request, CancellationToken cancellationToken)
         {
             var data = await _ProductRepository.GetByIdAsync(request.Id);
             var result = _mapper.Map<ProductDto>(data);

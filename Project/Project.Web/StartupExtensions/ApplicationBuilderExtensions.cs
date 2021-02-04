@@ -1,5 +1,5 @@
-﻿
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
+using Project.Web.Infrastructure;
 using System.IO;
 
 namespace Project.Web.StartupExtensions
@@ -13,12 +13,25 @@ namespace Project.Web.StartupExtensions
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
-      
+        /// <summary>
+        /// log4日志
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
         public static IApplicationBuilder UseLog4net(this IApplicationBuilder app)
         {
             var logRepository = log4net.LogManager.CreateRepository(System.Reflection.Assembly.GetEntryAssembly(), typeof(log4net.Repository.Hierarchy.Hierarchy));
             log4net.Config.XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
             return app;
+        }
+        /// <summary>
+        /// 异常处理中间件
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseErrorHandling(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<ErrorHandlingMiddleware>();
         }
     }
 }

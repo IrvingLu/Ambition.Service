@@ -51,5 +51,16 @@ namespace Project.Core.Tools
             }
             return result.ToString().TrimEnd('&');
         }
+        /// <summary>
+        /// 获取6位随机数
+        /// </summary>
+        /// <returns></returns>
+        public static int GetSmsCode()
+        {
+            Random rd = new Random();
+            int num = rd.Next(100000, 1000000);
+            return num;
+        }
+
     }
 }

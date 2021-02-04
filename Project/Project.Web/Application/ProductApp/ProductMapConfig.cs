@@ -1,11 +1,17 @@
 ﻿using AutoMapper;
-using Project.Core.Domain;
 using Project.Domain.Product;
-using Project.Web.Application.ProductApp.Commands;
-using Project.Web.Application.ProductApp.Dto;
+using Project.Web.Application.ProductApp.Command.RequestCommandDto;
+using Project.Web.Application.ProductApp.Query.ReturnDto;
 
 namespace Project.Web.Application.ProductApp
 {
+    /// <summary>
+    /// 功能描述    ：映射
+    /// 创 建 者    ：Seven
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/1/12 9:40:56 
+    /// </summary>
     public class ProductMapConfig : Profile
     {
         public ProductMapConfig()

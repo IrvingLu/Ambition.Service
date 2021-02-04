@@ -10,16 +10,23 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Project.Web.Controllers.File
+namespace Project.Web.Controllers.Common
 {
+    /// <summary>
+    /// 功能描述    ：上传接口
+    /// 创 建 者    ：Seven
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/1/12 9:40:56 
+    /// </summary>
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Authorize]
-    public class UploadController : BaseController
+    public class FileController : BaseController
     {
         private readonly IOssService _ossService;
-        public UploadController(IOssService ossService)
+        public FileController(IOssService ossService)
         {
             _ossService = ossService;
         }
