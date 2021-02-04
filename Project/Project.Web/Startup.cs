@@ -50,8 +50,8 @@ namespace Project.Web
                                     .AllowAnyHeader()
                                     .AllowCredentials());
             });
-            ////redis配置
-            //RedisHelper.Initialization(new CSRedis.CSRedisClient(Configuration.GetConnectionString("CsRedisCachingConnectionString")));
+            ///redis配置
+            RedisHelper.Initialization(new CSRedis.CSRedisClient(Configuration.GetConnectionString("CsRedisCachingConnectionString")));
             ////配置hangfire定时任务
             //services.AddHangfire(x => x.UseStorage(new MySqlStorage(Configuration.GetConnectionString("MySql") + ";Allow User Variables=true", new MySqlStorageOptions
             //{

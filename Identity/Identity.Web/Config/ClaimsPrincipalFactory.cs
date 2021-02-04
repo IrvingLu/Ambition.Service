@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 namespace Identity.Web.Config
 {
     /// <summary>
-    /// 重写GenerateClaimsAsync方法， 解决sub claims is missing的问题
+    /// 功能描述    ：重写GenerateClaimsAsync方法， 解决sub claims is missing的问题，忘记了为啥
+    /// 创 建 者    ：Seven
+    /// 创建日期    ：2021/1/12 9:40:56 
+    /// 最后修改者  ：Administrator
+    /// 最后修改日期：2021/2/4 9:40:56 
     /// </summary>
     public sealed class ClaimsPrincipalFactory : UserClaimsPrincipalFactory<ApplicationUser, ApplicationRole>
     {
@@ -28,6 +32,5 @@ namespace Identity.Web.Config
             }
             return identity;
         }
-
     }
 }
