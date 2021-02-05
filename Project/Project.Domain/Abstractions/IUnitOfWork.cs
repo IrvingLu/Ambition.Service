@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -16,8 +17,7 @@ namespace Project.Domain.Abstractions
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
-        void Begin();
-
-        Task CommitAsync();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+        Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default);
     }
 }

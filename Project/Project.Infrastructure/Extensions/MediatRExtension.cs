@@ -15,21 +15,18 @@ namespace Project.Infrastructure.Extensions
     /// </summary>
     public static class MediatorExtension
     {
-        public static async Task DispatchDomainEventsAsync(this IMediator mediator, Entity ctx)
+        public static async Task DispatchDomainEventsAsync(this IMediator mediator, DbContext ctx)
         {
+            var domainEntities = ctx.ChangeTracker
+                .Entries<Entity>()
+                .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any());
 
-            var domainEvents = ctx.DomainEvents.ToArray();
+            var domainEvents = domainEntities
+                .SelectMany(x => x.Entity.DomainEvents)
+                .ToList();
 
-            //var domainEntities = ctx.ChangeTracker
-            //    .Entries<Entity>()
-            //    .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any());
-
-            //var domainEvents = domainEntities
-            //    .SelectMany(x => x.Entity.DomainEvents)
-            //    .ToList();
-
-            //domainEntities.ToList()
-            //    .ForEach(entity => entity.Entity.ClearDomainEvents());
+            domainEntities.ToList()
+                .ForEach(entity => entity.Entity.ClearDomainEvents());
 
             foreach (var domainEvent in domainEvents)
                 await mediator.Publish(domainEvent);

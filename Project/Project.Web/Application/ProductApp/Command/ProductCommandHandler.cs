@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Project.Domain.Abstractions;
 using Project.Domain.Product;
 using Project.Infrastructure.EntityFrameworkCore;
@@ -22,16 +23,16 @@ namespace Project.Web.Application.ProductApp
     {
         #region Fileds
 
-        private readonly IUnitRepository<Product> _ProductRepository;
+        private readonly IUnitRepository<Product> _productRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _mediator;
         #endregion
 
         #region Ctor
-        public ProductCommandHandler(IUnitRepository<Product> ProductRepository, IMapper mapper, IUnitOfWork unitOfWork, IMediator mediator)
+        public ProductCommandHandler(IUnitRepository<Product> productRepository, IMapper mapper, IUnitOfWork unitOfWork, IMediator mediator)
         {
-            _ProductRepository = ProductRepository;
+            _productRepository = productRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _mediator = mediator;
@@ -48,15 +49,10 @@ namespace Project.Web.Application.ProductApp
         public async Task<Unit> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             //var result = _mapper.Map<Product>(request);
+            var ss = await _productRepository.TableNoTracking.ToListAsync();
             var data = new Product(request.Name);
-
-            await _mediator.DispatchDomainEventsAsync(data);
-            //using (_unitOfWork)
-            //{
-            //    _unitOfWork.Begin();
-            //    await _ProductRepository.AddAsync(data);
-            //    await _unitOfWork.CommitAsync();
-            //}
+            await _productRepository.AddAsync(data);
+            await _productRepository.UnitOfWork.SaveEntitiesAsync();
             return new Unit();
         }
         /// <summary>
@@ -68,7 +64,8 @@ namespace Project.Web.Application.ProductApp
         public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var result = _mapper.Map<Product>(request);
-            await _ProductRepository.UpdateAsync(result);
+            await _productRepository.UpdateAsync(result);
+            await _productRepository.UnitOfWork.SaveEntitiesAsync();
             return new Unit();
         }
         /// <summary>

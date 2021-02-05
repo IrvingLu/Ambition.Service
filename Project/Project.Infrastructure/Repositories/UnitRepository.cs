@@ -20,6 +20,15 @@ namespace Project.Infrastructure.Repositories
     public class UnitRepository<TEntity> : IUnitRepository<TEntity> where TEntity : Entity
     {
         protected virtual ApplicationDbContext DbContext { get; set; }
+        public virtual IUnitOfWork UnitOfWork => DbContext;
+        /// <summary>
+        /// 列表
+        /// </summary>
+        public virtual IQueryable<TEntity> Table => DbContext.Set<TEntity>();
+        /// <summary>
+        ///列表 AsNoTracking
+        /// </summary>
+        public virtual IQueryable<TEntity> TableNoTracking => DbContext.Set<TEntity>().AsNoTracking();
 
         public UnitRepository(ApplicationDbContext context)
         {

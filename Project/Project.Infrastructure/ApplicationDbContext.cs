@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using MediatR;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
@@ -6,9 +7,10 @@ using Microsoft.Extensions.Logging;
 using Project.Core.Domain.Identity;
 using Project.Domain.Abstractions;
 using Project.Domain.Product;
+using Project.Infrastructure.Extensions;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Transactions;
 
 namespace Project.Infrastructure.EntityFrameworkCore
 {
@@ -19,20 +21,28 @@ namespace Project.Infrastructure.EntityFrameworkCore
     /// 最后修改者  ：Administrator
     /// 最后修改日期：2021/1/12 9:40:56 
     /// </summary>
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>, IUnitOfWork
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>, IUnitOfWork, ITransaction
     {
         public IConfiguration _configuration { get; }
-        public ApplicationDbContext(IConfiguration configuration)
+        protected IMediator _mediator;
+
+        #region Ctor
+        public ApplicationDbContext(IConfiguration configuration, IMediator mediator)
         {
             _configuration = configuration;
+            _mediator = mediator;
         }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){
-        
         }
+        #endregion
+
         #region 数据库
 
         public DbSet<Product> Product { get; set; }
+
+
         #endregion
 
         #region 数据库配置
@@ -53,29 +63,74 @@ namespace Project.Infrastructure.EntityFrameworkCore
             base.OnModelCreating(modelBuilder);
         }
 
-        public IDbContextTransaction Transaction { get; private set; }
 
-        public void Begin()
+        #endregion
+
+        #region ITransaction
+
+        private IDbContextTransaction _currentTransaction;
+        public IDbContextTransaction GetCurrentTransaction() => _currentTransaction;
+        public bool HasActiveTransaction => _currentTransaction != null;
+        public Task<IDbContextTransaction> BeginTransactionAsync()
         {
-            Transaction = Database.BeginTransaction();
+            if (_currentTransaction != null) return null;
+            _currentTransaction = Database.BeginTransaction();
+            return Task.FromResult(_currentTransaction);
         }
 
-        public async Task CommitAsync()
+        public async Task CommitTransactionAsync(IDbContextTransaction transaction)
         {
-            await SaveChangesAsync();
-            if (Transaction != null)
+            if (transaction == null) throw new ArgumentNullException(nameof(transaction));
+            if (transaction != _currentTransaction) throw new InvalidOperationException($"Transaction {transaction.TransactionId} is not current");
+
+            try
             {
-                await Transaction.CommitAsync();
-                Transaction = null;
+                await SaveChangesAsync();
+                transaction.Commit();
+            }
+            catch
+            {
+                RollbackTransaction();
+                throw;
+            }
+            finally
+            {
+                if (_currentTransaction != null)
+                {
+                    _currentTransaction.Dispose();
+                    _currentTransaction = null;
+                }
             }
         }
 
-        public override void Dispose()
+        public void RollbackTransaction()
         {
-            base.Dispose();
+            try
+            {
+                _currentTransaction?.Rollback();
+            }
+            finally
+            {
+                if (_currentTransaction != null)
+                {
+                    _currentTransaction.Dispose();
+                    _currentTransaction = null;
+                }
+            }
         }
+
+
+
+
         #endregion
 
-
+        #region UnitWork
+        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
+        {
+            var result = await base.SaveChangesAsync(cancellationToken);
+            await _mediator.DispatchDomainEventsAsync(this);
+            return true;
+        }
+        #endregion
     }
 }

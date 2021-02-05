@@ -1,4 +1,5 @@
 ﻿using Project.Domain;
+using Project.Domain.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace Project.Infrastructure.Repositories
     /// </summary>
     public interface IUnitRepository<TEntity> where TEntity : Entity
     {
+        IQueryable<TEntity> Table { get; }
+        IQueryable<TEntity> TableNoTracking { get; }
+        IUnitOfWork UnitOfWork { get; }
         Task<TEntity> AddAsync(TEntity entity);
         bool Remove(Entity entity);
         Task<bool> RemoveAsync(Entity entity);
