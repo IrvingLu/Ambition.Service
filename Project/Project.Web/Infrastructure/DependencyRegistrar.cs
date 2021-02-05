@@ -1,8 +1,11 @@
 ﻿using Autofac;
+using Project.Domain.Abstractions;
 using Project.Infrastructure.Dapper;
 using Project.Infrastructure.EntityFrameworkCore;
 using Project.Infrastructure.Repositories;
 using Project.Web.Application.File;
+using Project.Web.Application.ProductApp;
+using System.Reflection;
 using Module = Autofac.Module;
 
 namespace Project.Web.Infrastructure
@@ -20,6 +23,7 @@ namespace Project.Web.Infrastructure
         {
             #region 数据相关注入
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(UnitRepository<>)).As(typeof(IUnitRepository<>)).InstancePerLifetimeScope();
             builder.RegisterType<ApplicationDbContext>().AsSelf();
             #endregion
 

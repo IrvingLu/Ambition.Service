@@ -1,4 +1,6 @@
-﻿namespace Project.Domain.Product
+﻿using Project.Domain.Events;
+
+namespace Project.Domain.Product
 {
     /// <summary>
     /// 功能描述    ：产品聚合根表
@@ -14,8 +16,10 @@
         /// </summary>
         public string Name { get; set; }
 
-
+        public Product(string name)
+        {
+            this.Name = name;
+            AddDomainEvent(new CreateProductEvent(this));
+        }
     }
-
-
 }

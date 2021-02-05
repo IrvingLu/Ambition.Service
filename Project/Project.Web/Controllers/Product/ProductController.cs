@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project.Core.Extensions;
 using Project.Web.Application.ProductApp.Command.RequestCommandDto;
-using Project.Web.Application.ProductApp.Query.Commands;
+using Project.Web.Application.ProductApp.Query.RequestCommandDto;
 using System;
 using System.Threading.Tasks;
 
@@ -37,7 +37,7 @@ namespace Project.Web.Controllers.Product
         /// </summary>
         /// <returns></returns>
         [HttpGet("Products")]
-        public async Task<IActionResult> GetAllAsync([FromQuery] PageProductCommand pageProductCommand)
+        public async Task<IActionResult> GetAllAsync([FromQuery] ProductsCommand pageProductCommand)
         {
             var id = User.GetUserId();
             var result = await _mediator.Send(pageProductCommand);
@@ -63,6 +63,7 @@ namespace Project.Web.Controllers.Product
         /// </summary>
         /// <returns></returns>
         [HttpPost("insert")]
+        [AllowAnonymous]
         public async Task<IActionResult> InsertAsync(CreateProductCommand createProductCommand)
         {
             await _mediator.Send(createProductCommand);

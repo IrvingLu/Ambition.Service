@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Application\Common\Sms\" />
     <Folder Include="Application\ProductApp\Command\ReturnDto\" />
+    <Folder Include="Application\ProductApp\IntegrationEvents\" />
   </ItemGroup>
 
   <ItemGroup>

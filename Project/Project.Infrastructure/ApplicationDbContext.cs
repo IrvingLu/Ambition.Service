@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Project.Core.Domain.Identity;
+using Project.Domain.Abstractions;
 using Project.Domain.Product;
 using System;
+using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Project.Infrastructure.EntityFrameworkCore
 {
@@ -15,7 +19,7 @@ namespace Project.Infrastructure.EntityFrameworkCore
     /// 最后修改者  ：Administrator
     /// 最后修改日期：2021/1/12 9:40:56 
     /// </summary>
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>, IUnitOfWork
     {
         public IConfiguration _configuration { get; }
         public ApplicationDbContext(IConfiguration configuration)
@@ -47,6 +51,28 @@ namespace Project.Infrastructure.EntityFrameworkCore
             //modelBuilder.ApplyConfiguration(new ReservationEntityTypeConfiguration());
             #endregion
             base.OnModelCreating(modelBuilder);
+        }
+
+        public IDbContextTransaction Transaction { get; private set; }
+
+        public void Begin()
+        {
+            Transaction = Database.BeginTransaction();
+        }
+
+        public async Task CommitAsync()
+        {
+            await SaveChangesAsync();
+            if (Transaction != null)
+            {
+                await Transaction.CommitAsync();
+                Transaction = null;
+            }
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
         }
         #endregion
 

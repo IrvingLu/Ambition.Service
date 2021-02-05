@@ -9,7 +9,7 @@ using Project.Infrastructure.EntityFrameworkCore;
 namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210112020354_Init")]
+    [Migration("20210205060615_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -230,9 +230,6 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("PicPath")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("UpdateTime")

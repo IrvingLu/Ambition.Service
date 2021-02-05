@@ -10,8 +10,6 @@ using MediatR;
 using Project.Core.BaseDto;
 using Project.Domain.Product;
 using Project.Infrastructure.Repositories;
-using Project.Web.Application.ProductApp.Dto;
-using Project.Web.Application.ProductApp.Query.Commands;
 using Project.Web.Application.ProductApp.Query.RequestCommandDto;
 using Project.Web.Application.ProductApp.Query.ReturnDto;
 using Project.Web.Core.Extensions;

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Dapper\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

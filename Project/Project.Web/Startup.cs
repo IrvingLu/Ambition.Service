@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Logging;
 using Project.Core.Domain.Identity;
+using Project.Domain.Abstractions;
 using Project.Infrastructure;
 using Project.Infrastructure.EntityFrameworkCore;
 using Project.Web.Appliccation.SignalrRHub;
@@ -39,6 +40,7 @@ namespace Project.Web
             {
                 options.AllowSynchronousIO = true;//允许读取文件流
             });
+            services.AddScoped<IUnitOfWork>(m => m.GetService<ApplicationDbContext>());
             services.AddCorsConfig();//跨域配置
             services.AddConfig(Configuration);//配置文件
             services.AddIdentityOptions();//身份认证配置
@@ -58,6 +60,7 @@ namespace Project.Web
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseRouting();
             app.UseCors("AllowSameDomain");//跨域
             app.UseAuthentication();//认证
             app.UseAuthorization();//授权
