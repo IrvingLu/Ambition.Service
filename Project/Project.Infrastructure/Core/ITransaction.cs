@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Domain.Abstractions
+namespace Project.Infrastructure.Core
 {
     /// <summary>
     /// 功能描述    ：ITransaction  

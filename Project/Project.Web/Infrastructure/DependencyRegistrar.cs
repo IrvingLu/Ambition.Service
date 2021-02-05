@@ -1,11 +1,8 @@
 ﻿using Autofac;
-using Project.Domain.Abstractions;
 using Project.Infrastructure.Dapper;
 using Project.Infrastructure.EntityFrameworkCore;
 using Project.Infrastructure.Repositories;
 using Project.Web.Application.File;
-using Project.Web.Application.ProductApp;
-using System.Reflection;
 using Module = Autofac.Module;
 
 namespace Project.Web.Infrastructure

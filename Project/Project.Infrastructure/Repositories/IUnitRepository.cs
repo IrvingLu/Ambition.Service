@@ -1,9 +1,6 @@
 ﻿using Project.Domain;
-using Project.Domain.Abstractions;
-using System;
-using System.Collections.Generic;
+using Project.Infrastructure.Core;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Project.Infrastructure.Repositories

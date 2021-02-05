@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Project.Domain.Abstractions;
 using Project.Domain.Product;
-using Project.Infrastructure.EntityFrameworkCore;
-using Project.Infrastructure.Extensions;
+using Project.Infrastructure.Core;
 using Project.Infrastructure.Repositories;
 using Project.Web.Application.ProductApp.Command.RequestCommandDto;
 using System.Threading;
