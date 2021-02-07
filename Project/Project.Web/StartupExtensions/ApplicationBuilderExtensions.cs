@@ -14,17 +14,6 @@ namespace Project.Web.StartupExtensions
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
-        /// log4日志
-        /// </summary>
-        /// <param name="app"></param>
-        /// <returns></returns>
-        public static IApplicationBuilder UseLog4net(this IApplicationBuilder app)
-        {
-            var logRepository = log4net.LogManager.CreateRepository(System.Reflection.Assembly.GetEntryAssembly(), typeof(log4net.Repository.Hierarchy.Hierarchy));
-            log4net.Config.XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
-            return app;
-        }
-        /// <summary>
         /// 异常处理中间件
         /// </summary>
         /// <param name="builder"></param>

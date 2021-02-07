@@ -66,6 +66,10 @@ namespace Project.Web.Controllers.Product
         [AllowAnonymous]
         public async Task<IActionResult> InsertAsync(CreateProductCommand createProductCommand)
         {
+            var data = new CreateProductCommand();
+            data = null;
+            data.Name = "22";
+
             await _mediator.Send(createProductCommand);
             return Success();
         }

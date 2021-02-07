@@ -66,7 +66,6 @@ namespace Project.Web
             app.UseAuthorization();//授权
             app.UseHealthChecks("/health");//健康检查
             app.UseApiVersioning();//版本
-            app.UseLog4net();//日志中间件
             app.UseErrorHandling();//异常处理
             app.UseEndpoints(endpoints =>
             {

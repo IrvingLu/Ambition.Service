@@ -23,13 +23,16 @@ namespace Project.Infrastructure.EntityFrameworkCore
     /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>, IUnitOfWork, ITransaction
     {
-        public IConfiguration _configuration { get; }
+        public IConfiguration Configuration { get; }
         protected IMediator _mediator;
-
+        private static readonly ILoggerFactory _efLogger = LoggerFactory.Create(builder =>
+        {
+            builder.AddFilter((category, level) => category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information).AddConsole();
+        });
         #region Ctor
         public ApplicationDbContext(IConfiguration configuration, IMediator mediator)
         {
-            _configuration = configuration;
+            Configuration = configuration;
             _mediator = mediator;
         }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -46,15 +49,13 @@ namespace Project.Infrastructure.EntityFrameworkCore
         #endregion
 
         #region 数据库配置
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(_configuration.GetConnectionString("MySql"), new MySqlServerVersion(new Version(8, 0, 21))).UseLoggerFactory(efLogger);
+            optionsBuilder.UseMySql(Configuration.GetConnectionString("MySql"), new MySqlServerVersion(new Version(8, 0, 21))).UseLoggerFactory(_efLogger);
             base.OnConfiguring(optionsBuilder);
         }
-        public static readonly ILoggerFactory efLogger = LoggerFactory.Create(builder =>
-        {
-            builder.AddFilter((category, level) => category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information).AddConsole();
-        });
+ 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region 注册领域模型与数据库的映射关系
