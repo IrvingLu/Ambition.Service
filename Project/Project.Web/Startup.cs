@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Project.Core.Domain.Identity;
 using Project.Infrastructure;
@@ -50,6 +51,7 @@ namespace Project.Web
             services.AddSignalR();//SignalR
             services.AddApiVersion();//api版本
             services.AddController();//api控制器
+            //services.AddLogging();
             services.AddIdentity<ApplicationUser,ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();//Identity 注入
             services.AddAuthService(Configuration);//认证服务
         }

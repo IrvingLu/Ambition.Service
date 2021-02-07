@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Events;
+using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
 using System;
 using System.Net;
@@ -46,8 +48,8 @@ namespace Project.Web
 
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
+                .Enrich.WithExceptionDetails()
                 .Enrich.WithMachineName()
-                .WriteTo.Debug()
                 .WriteTo.Console()
                 .WriteTo.Elasticsearch(ConfigureElasticSink(configuration, environment))
                 .Enrich.WithProperty("Environment", environment)
@@ -60,7 +62,8 @@ namespace Project.Web
             return new ElasticsearchSinkOptions(new Uri(configuration["ApplicationConfiguration:ElkAddress"]))
             {
                 AutoRegisterTemplate = true,
-                IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name.ToLower().Replace(".", "-")}-{environment?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
+                IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name.ToLower().Replace(".", "-")}-{environment?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}",
+                MinimumLogEventLevel= LogEventLevel.Error
             };
         }
         #endregion

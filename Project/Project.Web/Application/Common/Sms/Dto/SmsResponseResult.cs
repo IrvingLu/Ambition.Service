@@ -12,7 +12,7 @@
         /// <summary>
         /// 消息
         /// </summary>
-        public string Message { get; set; }
+        public string Msg { get; set; }
         /// <summary>
         /// 状态码
         /// </summary>

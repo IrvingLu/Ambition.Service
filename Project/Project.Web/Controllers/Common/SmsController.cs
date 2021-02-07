@@ -36,11 +36,11 @@ namespace Project.Web.Controllers.Common
             ///发送失败
             if (responseResult.Code != "Ok")
             {
-                return Error("短信服务错误", new SmsResponse(responseResult.Message, responseResult.Code));
+                return Error("短信服务错误", new SmsResponse(responseResult.Msg, responseResult.Code));
             }
             ///发送短信成功，存code到redis
             await RedisHelper.SetAsync(request.Phone, authCode, 3000);//5分钟过期
-            return Success(new SmsResponse(responseResult.Message, responseResult.Code));
+            return Success(new SmsResponse(responseResult.Msg, responseResult.Code));
         }
     }
 }

@@ -35,10 +35,10 @@ namespace Project.Web.Controllers.Auth
             var result = await _mediator.Send(loginCommand);
             if (result.AccessToken == null)
             {
-                //登录失败,具体原因参照Message
-                return Ok(new TokenDto { Code = InvokeHttp702(), Message = result.ErrorDescription, Error = result.Error });
+                //登录失败,具体原因参照Msg
+                return Ok(new TokenDto { Code = InvokeHttp702(), Msg = result.ErrorDescription, Error = result.Error });
             }
-            return Ok(new TokenDto { Code = (int)HttpStatusCode.OK, Message = "验证通过", AccessToken = result.AccessToken, TokenType = result.TokenType});
+            return Ok(new TokenDto { Code = (int)HttpStatusCode.OK, Msg = "验证通过", AccessToken = result.AccessToken, TokenType = result.TokenType});
         }
     }
 }

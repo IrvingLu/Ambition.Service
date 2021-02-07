@@ -17,7 +17,7 @@
         /// <summary>
         /// 消息
         /// </summary>
-        public string Message { get; set; }
+        public string Msg { get; set; }
 
         public BaseResult()
         {
@@ -27,7 +27,7 @@
         public BaseResult(int code, string message)
         {
             Code = code;
-            Message = message;
+            Msg = message;
         }
     }
 }

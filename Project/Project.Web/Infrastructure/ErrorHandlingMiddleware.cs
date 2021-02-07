@@ -20,28 +20,26 @@ namespace Project.Web.Infrastructure
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ErrorHandlingMiddleware> _logger;
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
         public async Task Invoke(HttpContext context)
         {
             try
             {
-  
-                await _next(context);
+                if (!context.Response.HasStarted)
+                {
+                    await _next.Invoke(context);
+                }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
-                ///处理错误异常
-                var statusCode = context.Response.StatusCode;
-                await HandleExceptionAsync(context, statusCode, ex.Message);
-            }
-            finally
-            {
-                var statusCode = context.Response.StatusCode;
-                await HandleExceptionAsync(context, statusCode);
+                _logger.LogError(ex.StackTrace);
+                //处理错误异常
+                var statusCode = 8888;
+                await HandleExceptionAsync(context, statusCode, "Server Error");
             }
         }
         //异常错误信息捕获，将错误信息用Json方式返回

@@ -18,7 +18,7 @@
         public DataResult(int code, string message, object data) : base(code, message)
         {
             Code = code;
-            Message = message;
+            Msg = message;
             Data = data;
         }
     }
@@ -34,7 +34,7 @@
         public DataListResult(int code, string message, object data, int count) : base(code, message, data)
         {
             Code = code;
-            Message = message;
+            Msg = message;
             Data = data;
             TotalCount = count;
         }
