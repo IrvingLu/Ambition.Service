@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using NMS.RTIS.Infrastructure.EntityFrameworkCore;
 using NMS.RTIS.Infrastructure.Repositories;
+using NMS.RTIS.Web.Application.File;
 using Module = Autofac.Module;
 
 namespace NMS.RTIS.Web.Infrastructure
@@ -22,8 +23,7 @@ namespace NMS.RTIS.Web.Infrastructure
             #endregion
 
             #region 基础服务
-            //builder.RegisterType<DapperQuery>().As<IDapperQuery>().InstancePerLifetimeScope();
-            //builder.RegisterType<OssService>().As<IOssService>().InstancePerLifetimeScope();
+            builder.RegisterType<FileService>().As<IFileService>().InstancePerLifetimeScope();
             #endregion
         }
     }

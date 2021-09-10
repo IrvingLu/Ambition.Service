@@ -17,7 +17,6 @@ namespace NMS.RTIS.Web.Controllers
         /// <summary>
         /// 成功
         /// </summary>
-        /// <param name="value"></param>
         /// <returns></returns>
         [NonAction]
         public IActionResult Success()
@@ -27,7 +26,6 @@ namespace NMS.RTIS.Web.Controllers
         /// <summary>
         /// 成功返回数据
         /// </summary>
-        /// <param name="value"></param>
         /// <returns></returns>
         [NonAction]
         public IActionResult Success([ActionResultObjectValue] object data, int? count = null)
@@ -40,7 +38,6 @@ namespace NMS.RTIS.Web.Controllers
         /// <summary>
         /// 内部逻辑可识别错误，返回统一状态码，前端拦截
         /// </summary>
-        /// <param name="value"></param>
         /// <returns></returns>
         [NonAction]
         public IActionResult Error([ActionResultObjectValue] string msg)

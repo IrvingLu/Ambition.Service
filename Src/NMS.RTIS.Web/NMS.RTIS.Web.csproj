@@ -9,27 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Application\Common\**" />
     <Compile Remove="Application\ProductApp\**" />
-    <Compile Remove="Application\SignalrRHub\**" />
     <Compile Remove="Controllers\Auth\Patient\**" />
     <Compile Remove="Controllers\Common\**" />
     <Compile Remove="Controllers\Product\**" />
-    <Content Remove="Application\Common\**" />
     <Content Remove="Application\ProductApp\**" />
-    <Content Remove="Application\SignalrRHub\**" />
     <Content Remove="Controllers\Auth\Patient\**" />
     <Content Remove="Controllers\Common\**" />
     <Content Remove="Controllers\Product\**" />
-    <EmbeddedResource Remove="Application\Common\**" />
     <EmbeddedResource Remove="Application\ProductApp\**" />
-    <EmbeddedResource Remove="Application\SignalrRHub\**" />
     <EmbeddedResource Remove="Controllers\Auth\Patient\**" />
     <EmbeddedResource Remove="Controllers\Common\**" />
     <EmbeddedResource Remove="Controllers\Product\**" />
-    <None Remove="Application\Common\**" />
     <None Remove="Application\ProductApp\**" />
-    <None Remove="Application\SignalrRHub\**" />
     <None Remove="Controllers\Auth\Patient\**" />
     <None Remove="Controllers\Common\**" />
     <None Remove="Controllers\Product\**" />

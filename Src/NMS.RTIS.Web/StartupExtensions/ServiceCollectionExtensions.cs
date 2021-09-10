@@ -1,16 +1,27 @@
 ﻿using Identity.Web.Identity.Validator;
 using IdentityServer4.AccessTokenValidation;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using NMS.RTIS.Core.Configuration;
+using NMS.RTIS.Core.Tools;
+using NMS.RTIS.Domain.Identity;
+using NMS.RTIS.Infrastructure.Core;
+using NMS.RTIS.Infrastructure.EntityFrameworkCore;
 using NMS.RTIS.Web.Identity;
 using System;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace NMS.RTIS.Web.StartupExtensions
@@ -24,6 +35,59 @@ namespace NMS.RTIS.Web.StartupExtensions
     /// </summary>
     public static class ServiceCollectionExtensions
     {
+
+        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            RedisHelper.Initialization(new CSRedis.CSRedisClient(configuration.GetConnectionString("CsRedisCachingConnectionString")));  //redis配置
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);//解决.netcore 编码问题
+            IdentityModelEventSource.ShowPII = true;//显示错误的详细信息并查看问题
+            services.AddHttpContextAccessor();//加载http上下文
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;//允许读取文件流
+            });
+            services.AddScoped<IUnitOfWork>(m => m.GetService<ApplicationDbContext>());
+            services.AddCorsConfig();//跨域配置
+            services.AddConfig(configuration);//配置文件
+            services.AddIdentityOptions();//身份认证配置
+            services.AddAutoMapper(typeof(Startup));//automapper
+            services.AddMediatR(typeof(Startup));//CQRS
+            services.AddHealthChecks();//健康检查
+            services.AddSignalR();//SignalR
+            services.AddController();//api控制器
+            services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();//Identity 注入
+            services.AddAuthService(configuration);//认证服务
+            services.AddSwaggerInfo();
+            return services;
+        }
+
+        /// <summary>
+        /// Swagger
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddSwaggerInfo(this IServiceCollection services) {
+
+            services.AddSwaggerGen(c =>
+            {
+                typeof(ApiVersionEnum).GetEnumNames().ToList().ForEach(version =>
+                {
+                    c.SwaggerDoc(version, new OpenApiInfo()
+                    {
+                        Title = $"{typeof(Startup).Namespace}",
+                        Version = version,
+                        Description = $"{version} 版本，可根据需要选择",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "东软医疗系统股份有限公司",
+                            Email = "nms-admin@neusoftmedical.com",
+                            Url = new Uri("http://www.neusoftmedical.com/")
+                        },
+                    });
+                });
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{typeof(Startup).Namespace}" + ".xml");
+                c.IncludeXmlComments(xmlPath, true);
+            });
+        }
         /// <summary>
         /// settings配置
         /// </summary>
@@ -76,7 +140,7 @@ namespace NMS.RTIS.Web.StartupExtensions
             });
         }
         /// <summary>
-        /// 资源服务器注入
+        /// 认证服务
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>

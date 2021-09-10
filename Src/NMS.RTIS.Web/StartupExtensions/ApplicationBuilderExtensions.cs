@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using NMS.RTIS.Core.Infrastructure;
+using NMS.RTIS.Core.Tools;
+using NMS.RTIS.Infrastructure;
+using NMS.RTIS.Web.Appliccation.SignalrRHub;
+using System.Linq;
 
 namespace NMS.RTIS.Web.StartupExtensions
 {
@@ -12,6 +16,42 @@ namespace NMS.RTIS.Web.StartupExtensions
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
+
+        public static IApplicationBuilder UseConfig(this IApplicationBuilder app)
+        {
+            app.UseRouting();
+            app.UseCors("AllowSameDomain");//跨域
+            app.UseAuthentication();//认证
+            app.UseAuthorization();//授权
+            app.UseHealthChecks("/health");//健康检查
+            app.UseErrorHandling();//异常处理
+            app.UseSwaggerInfo();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<ProjectHub>("/project").RequireCors(t => t.WithOrigins(new string[] { "null" }).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            });
+            app.UseIdentityServer();
+            DbContextSeed.SeedAsync(app.ApplicationServices).Wait();//启动初始化数据
+            return app;
+        }
+
+
+        public static void UseSwaggerInfo(this IApplicationBuilder app)
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                typeof(ApiVersionEnum).GetEnumNames().ToList().ForEach(version =>
+                {
+#if DEBUG
+                    c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{version}");
+#else
+                    c.SwaggerEndpoint($"./swagger/{version}/swagger.json", $"{version}");
+#endif
+                });
+            });
+        }
         /// <summary>
         /// 异常处理中间件
         /// </summary>

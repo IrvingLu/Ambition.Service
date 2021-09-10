@@ -29,15 +29,15 @@ namespace Identity.Web.Identity.Validator
             try
             {
                 var user = await _userManager.FindByNameAsync(context.UserName);
-                ///判断用户是否存在
+                //判断用户是否存在
                 if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(context.UserName, context.Password, false, lockoutOnFailure: false);
-                    ///判断验证是否成功
+                    //判断验证是否成功
                     if (result.Succeeded)
                     {
                         bool islocked = await _userManager.GetLockoutEnabledAsync(user);
-                        ///验证用户是否锁定
+                        //验证用户是否锁定
                         if (islocked)
                         {
                             context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "用户已锁定，请联系管理员解锁");
@@ -45,18 +45,18 @@ namespace Identity.Web.Identity.Validator
                         }
                         else
                         {
-                            ///重新计算失败次数
+                            //重新计算失败次数
                             await _userManager.ResetAccessFailedCountAsync(user);
-                            ///认证成功，返回token
+                            //认证成功，返回token
                             context.Result = new GrantValidationResult(user.Id.ToString(), user.UserName, IdentityConfig.GetUserClaim(user));
                         }
                     }
                     else
                     {
-                        ///记录失败次数
+                        //记录失败次数
                         await _userManager.AccessFailedAsync(user);
                         int accessFailedCount = await _userManager.GetAccessFailedCountAsync(user);
-                        ///输入5次错误密码锁定账户
+                        //输入5次错误密码锁定账户
                         if (accessFailedCount == 5)
                         {
                             await _userManager.AccessFailedAsync(user);
