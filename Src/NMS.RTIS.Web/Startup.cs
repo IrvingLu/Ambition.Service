@@ -1,25 +1,10 @@
 using Autofac;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Logging;
-using Microsoft.OpenApi.Models;
-using NMS.RTIS.Core.Tools;
-using NMS.RTIS.Domain.Identity;
-using NMS.RTIS.Infrastructure;
-using NMS.RTIS.Infrastructure.Core;
-using NMS.RTIS.Infrastructure.EntityFrameworkCore;
-using NMS.RTIS.Web.Appliccation.SignalrRHub;
 using NMS.RTIS.Web.Infrastructure;
 using NMS.RTIS.Web.StartupExtensions;
-using System;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace NMS.RTIS.Web
 {

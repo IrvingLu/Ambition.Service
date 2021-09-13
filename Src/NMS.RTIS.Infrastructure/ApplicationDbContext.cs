@@ -25,11 +25,6 @@ namespace NMS.RTIS.Infrastructure.EntityFrameworkCore
     {
         public IConfiguration Configuration { get; }
         protected IMediator _mediator;
-        private static readonly ILoggerFactory _efLogger = LoggerFactory.Create(builder =>
-        {
-            builder.AddFilter((category, level) => category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information).AddConsole();
-        });
-
         #region Ctor
         public ApplicationDbContext(IConfiguration configuration, IMediator mediator)
         {
