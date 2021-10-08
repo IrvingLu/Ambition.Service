@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NMS.RTIS.Web.Identity
+namespace NMS.RTIS.Web.IdentityServer
 {
     /// <summary>
     /// 功能描述    ：提供和存储有关用户生成的用户的配置文件信息的服务

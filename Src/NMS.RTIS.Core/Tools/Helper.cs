@@ -61,6 +61,5 @@ namespace NMS.RTIS.Core.Tools
             int num = rd.Next(100000, 1000000);
             return num;
         }
-
     }
 }

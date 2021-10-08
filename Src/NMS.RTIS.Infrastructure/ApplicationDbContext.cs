@@ -3,14 +3,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
-using NMS.RTIS.Core.Abstractions;
 using NMS.RTIS.Core.Extensions;
 using NMS.RTIS.Domain.Identity;
 using NMS.RTIS.Infrastructure.Core;
 using NMS.RTIS.Infrastructure.EntityTypeConfiguration;
 using System;
-using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,6 +35,7 @@ namespace NMS.RTIS.Infrastructure.EntityFrameworkCore
         {
 
         }
+
         #endregion
 
         #region 数据库
@@ -58,7 +56,7 @@ namespace NMS.RTIS.Infrastructure.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region 注册领域模型与数据库的映射关系
-            modelBuilder.ApplyConfiguration(new PatientEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new PatientEntityTypeConfiguration());
             #endregion
             base.OnModelCreating(modelBuilder);
         }
@@ -125,7 +123,7 @@ namespace NMS.RTIS.Infrastructure.EntityFrameworkCore
         #region UnitWork
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            var result = await base.SaveChangesAsync(cancellationToken);
+            await base.SaveChangesAsync(cancellationToken);
             await _mediator.DispatchDomainEventsAsync(this);
             return true;
         }

@@ -5,7 +5,7 @@ using NMS.RTIS.Domain.Identity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace NMS.RTIS.Web.Identity
+namespace NMS.RTIS.Web.IdentityServer
 {
     /// <summary>
     /// 功能描述    ：重写GenerateClaimsAsync方法， 解决sub claims is missing的问题，忘记了为啥

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NMS.RTIS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211008025245_1043")]
-    partial class _1043
+    [Migration("20211008083940_addversion")]
+    partial class addversion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -239,6 +239,11 @@ namespace NMS.RTIS.Infrastructure.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
+
                     b.Property<int>("Sex")
                         .HasColumnType("integer");
 
@@ -264,6 +269,11 @@ namespace NMS.RTIS.Infrastructure.Migrations
 
                     b.Property<string>("PlanName")
                         .HasColumnType("text");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("timestamp without time zone");

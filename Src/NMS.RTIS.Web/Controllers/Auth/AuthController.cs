@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using NMS.RTIS.Core.Middleware;
 using NMS.RTIS.Web.Application.Auth.Command;
 using System.Threading.Tasks;
 
@@ -35,7 +36,7 @@ namespace NMS.RTIS.Web.Controllers.Auth
             var result = await _mediator.Send(loginCommand);
             if (result.AccessToken == null)
             {
-                return Error(result.ErrorDescription);
+                throw new InternalException(result.ErrorDescription);
             }
             return Success(result.AccessToken);
         }

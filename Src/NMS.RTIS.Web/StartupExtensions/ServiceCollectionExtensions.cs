@@ -1,28 +1,24 @@
-﻿using Identity.Web.Identity.Validator;
+﻿using Identity.Web.IdentityServer.Validator;
 using IdentityServer4.AccessTokenValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
-using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using NMS.RTIS.Core.Configuration;
-using NMS.RTIS.Core.Tools;
+using NMS.RTIS.Core.Enums;
 using NMS.RTIS.Domain.Identity;
 using NMS.RTIS.Infrastructure.Core;
 using NMS.RTIS.Infrastructure.EntityFrameworkCore;
 using NMS.RTIS.Service;
-using NMS.RTIS.Web.Identity;
+using NMS.RTIS.Web.IdentityServer;
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NMS.RTIS.Web.StartupExtensions
@@ -44,6 +40,7 @@ namespace NMS.RTIS.Web.StartupExtensions
             services.ConfigureStartupConfig<AlibabaSmsConfig>(configuration.GetSection("AlibabaSmsConfig"));
             RedisHelper.Initialization(new CSRedis.CSRedisClient(configuration.GetConnectionString("CsRedisCachingConnectionString")));  //redis配置
             services.AddScoped<IUnitOfWork>(m => m.GetService<ApplicationDbContext>());
+            //services.AddDbContext<ApplicationDbContext>();
             services.AddCorsConfig();//跨域配置
             services.AddIdentityOptions();//身份认证配置
             services.AddAutoMapper(typeof(ServiceStartup));//automapper

@@ -5,7 +5,7 @@ using NMS.RTIS.Domain.Identity;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace NMS.RTIS.Web.Identity
+namespace NMS.RTIS.Web.IdentityServer
 {
     /// <summary>
     /// 功能描述    ：认证服务器配置文件

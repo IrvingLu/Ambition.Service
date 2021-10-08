@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace NMS.RTIS.Core.Abstractions
 {
@@ -28,6 +29,17 @@ namespace NMS.RTIS.Core.Abstractions
         /// 创建时间
         /// </summary>
         public DateTime? UpdateTime { get; set; }
+
+        /// <summary>
+        /// 时间戳/行版本,并发令牌
+        /// </summary>
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
+        public void SetRowVersion(byte[] rowVersion)
+        {
+            RowVersion = rowVersion;
+        }
 
         //表示对象是否为全新创建的，未持久化的
         public bool IsTransient()

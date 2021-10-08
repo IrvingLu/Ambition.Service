@@ -3,11 +3,11 @@ using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NMS.RTIS.Domain.Identity;
-using NMS.RTIS.Web.Identity;
+using NMS.RTIS.Web.IdentityServer;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Identity.Web.Identity.Validator
+namespace Identity.Web.IdentityServer.Validator
 {
     /// <summary>
     /// 功能描述    ：手机验证码登录

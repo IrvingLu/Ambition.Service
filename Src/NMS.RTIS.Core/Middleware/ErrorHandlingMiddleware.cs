@@ -5,7 +5,7 @@ using NMS.RTIS.Core.ApiResult;
 using System;
 using System.Threading.Tasks;
 
-namespace NMS.RTIS.Core.Infrastructure
+namespace NMS.RTIS.Core.Middleware
 {
     /// <summary>
     /// 功能描述    ：全剧异常处理中间件
@@ -59,6 +59,14 @@ namespace NMS.RTIS.Core.Infrastructure
             response.ContentType = "application/json;charset=utf-8";
             response.WriteAsync(result);
             return Task.CompletedTask;
+        }
+
+    }
+    public class InternalException : Exception
+    {
+        public InternalException(string msg) : base(msg)
+        {
+
         }
     }
 }

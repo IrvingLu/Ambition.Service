@@ -13,7 +13,10 @@ namespace NMS.RTIS.Web
 {
     public class Program
     {
-        private static IConfigurationRoot configuration;
+       private static readonly IConfigurationRoot configuration  = new ConfigurationBuilder()
+              .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+              .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",optional: true)
+              .Build();
         public static void Main(string[] args)
         {
             ConfigureLogging();
@@ -33,13 +36,6 @@ namespace NMS.RTIS.Web
         private static void ConfigureLogging()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile(
-                    $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
-                    optional: true)
-                .Build();
-
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .Enrich.WithExceptionDetails()

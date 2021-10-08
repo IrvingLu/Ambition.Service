@@ -237,6 +237,11 @@ namespace NMS.RTIS.Infrastructure.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
+
                     b.Property<int>("Sex")
                         .HasColumnType("integer");
 
@@ -262,6 +267,11 @@ namespace NMS.RTIS.Infrastructure.Migrations
 
                     b.Property<string>("PlanName")
                         .HasColumnType("text");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("timestamp without time zone");

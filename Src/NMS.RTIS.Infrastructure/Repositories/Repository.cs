@@ -2,6 +2,7 @@
 using NMS.RTIS.Core.Abstractions;
 using NMS.RTIS.Infrastructure.Core;
 using NMS.RTIS.Infrastructure.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,8 +44,10 @@ namespace NMS.RTIS.Infrastructure.Repositories
         /// <returns></returns>
         public async Task AddAsync(TEntity entity)
         {
-            entity.CreateTime = System.DateTime.Now;
-            await Entities.AddAsync(entity);
+            var rowVersion = System.Text.Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
+            entity.SetRowVersion(rowVersion);
+            entity.CreateTime = DateTime.Now;
+            var ss = await Entities.AddAsync(entity);
         }
         /// <summary>
         /// 多条新增
@@ -52,6 +55,7 @@ namespace NMS.RTIS.Infrastructure.Repositories
         /// <param name="entities">Entities</param>
         public async Task AddEnumerableAsync(IEnumerable<TEntity> entities)
         {
+            entities = entities.Select(f => { f.CreateTime = DateTime.Now; return f; });
             await Entities.AddRangeAsync(entities);
         }
         /// <summary>
@@ -61,7 +65,9 @@ namespace NMS.RTIS.Infrastructure.Repositories
         /// <returns></returns>
         public virtual Task UpdateAsync(TEntity entity)
         {
-            entity.UpdateTime = System.DateTime.Now;
+            var rowVersion = System.Text.Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
+            entity.SetRowVersion(rowVersion);
+            entity.UpdateTime = DateTime.Now;
             return Task.FromResult(Entities.Update(entity));
         }
         /// <summary>
@@ -71,7 +77,9 @@ namespace NMS.RTIS.Infrastructure.Repositories
         /// <returns></returns>
         public virtual Task RemoveAsync(TEntity entity)
         {
-            entity.UpdateTime = System.DateTime.Now;
+            var rowVersion = System.Text.Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
+            entity.SetRowVersion(rowVersion);
+            entity.UpdateTime = DateTime.Now;
             return Task.FromResult(Entities.Remove(entity));
         }
     }
