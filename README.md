@@ -1,34 +1,50 @@
+# net5 单机框架
 
-
-# net5开发基础框架
-
-**不知道起个什么名好，反正也没有人会用，要不叫Seven，狗蛋，五百万咋样？**
-
-**自己慢慢把常用的一些东西更新到里面**
-
-## 框架
+## 基础框架
 
 > .net5
 
 ## 数据库
 
-> 可以连接mysql，sqlserver，postgresql
+> postgresql， 修改配置，可连接mysql sql
+>
+> redis
+
+## 技术框架
+设计模式
+> DDD设计思想（分层架构，聚合根，值对象，领域事件）
+> 
+> CQRS架构
+
+基础
+> identity:身份认证框架
+> 
+> identityServer4:统一认证中心
+> 
+> AutoMapper:实体映射
+> 
+> EFCore:实体框架Orm
+> 
+> 仓储封装
+> 
+> Dapper:数据访问Orm
+> 
+> UnitOfWork:事务
+> 
+> ELK:日志中心
+> 
+> Serilog:日志格式化
+> 
+> Swagger:接口文档以及版本管理
+> 
+> 全局异常处理
+> 
+> api统一返回类型
+> 
+> AutoFac：扩展依赖注入
+
+运维部署
+> docker
 
 
-## 文件夹结构
 
-> identity：认证服务
-
-> project：基础服务
-
-## 技术框架使用
-
-> automapper，identity4，EF Core，Dapper，CQRS等
-
-> DDD设计思想
-
-## 版本更新
-### 2020-11-13
-*版本升级到net5*
-### 2020-11-12
-*整理代码，之前的没有记录，从今天开始记录每一次上传的内容*
