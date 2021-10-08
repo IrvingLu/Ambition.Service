@@ -149,7 +149,7 @@ namespace NMS.RTIS.Web.StartupExtensions
                 options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddIdentityServerAuthentication(options =>
             {
-                options.Authority = "http://10.13.37.15:8080";
+                options.Authority = configuration["ApplicationConfiguration:Url"];
                 options.RequireHttpsMetadata = false;
                 options.ApiName = "api";
                 options.Events = new JwtBearerEvents

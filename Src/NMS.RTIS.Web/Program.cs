@@ -7,13 +7,13 @@ using Serilog.Events;
 using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
 using System;
-using System.Net;
 using System.Reflection;
 
 namespace NMS.RTIS.Web
 {
     public class Program
     {
+        private static IConfigurationRoot configuration;
         public static void Main(string[] args)
         {
             ConfigureLogging();
@@ -24,13 +24,7 @@ namespace NMS.RTIS.Web
             .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseKestrel(
-                    options =>
-                    {
-                        options.Limits.MinRequestBodyDataRate = null;//½â¾ö
-                        options.AddServerHeader = false;
-                        options.Listen(IPAddress.Any, 8080);
-                    });
+                    webBuilder.UseUrls(configuration["ApplicationConfiguration:Url"]);
                 })
             .UseSerilog()
             .UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -39,7 +33,7 @@ namespace NMS.RTIS.Web
         private static void ConfigureLogging()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            var configuration = new ConfigurationBuilder()
+            configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile(
                     $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
