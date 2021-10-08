@@ -17,6 +17,7 @@ using NMS.RTIS.Core.Tools;
 using NMS.RTIS.Domain.Identity;
 using NMS.RTIS.Infrastructure.Core;
 using NMS.RTIS.Infrastructure.EntityFrameworkCore;
+using NMS.RTIS.Service;
 using NMS.RTIS.Web.Identity;
 using System;
 using System.IO;
@@ -38,20 +39,15 @@ namespace NMS.RTIS.Web.StartupExtensions
 
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.ConfigureStartupConfig<MongodbHostConfig>(configuration.GetSection("MongodbHostConfig"));
+            services.ConfigureStartupConfig<OssClientConfig>(configuration.GetSection("OssClientConfig"));
+            services.ConfigureStartupConfig<AlibabaSmsConfig>(configuration.GetSection("AlibabaSmsConfig"));
             RedisHelper.Initialization(new CSRedis.CSRedisClient(configuration.GetConnectionString("CsRedisCachingConnectionString")));  //redis配置
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);//解决.netcore 编码问题
-            IdentityModelEventSource.ShowPII = true;//显示错误的详细信息并查看问题
-            services.AddHttpContextAccessor();//加载http上下文
-            services.Configure<KestrelServerOptions>(options =>
-            {
-                options.AllowSynchronousIO = true;//允许读取文件流
-            });
             services.AddScoped<IUnitOfWork>(m => m.GetService<ApplicationDbContext>());
             services.AddCorsConfig();//跨域配置
-            services.AddConfig(configuration);//配置文件
             services.AddIdentityOptions();//身份认证配置
-            services.AddAutoMapper(typeof(Startup));//automapper
-            services.AddMediatR(typeof(Startup));//CQRS
+            services.AddAutoMapper(typeof(ServiceStartup));//automapper
+            services.AddMediatR(typeof(ServiceStartup));//CQRS
             services.AddHealthChecks();//健康检查
             services.AddSignalR();//SignalR
             services.AddController();//api控制器
@@ -87,18 +83,6 @@ namespace NMS.RTIS.Web.StartupExtensions
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{typeof(Startup).Namespace}" + ".xml");
                 c.IncludeXmlComments(xmlPath, true);
             });
-        }
-        /// <summary>
-        /// settings配置
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="configuration"></param>
-        /// <returns></returns>
-        public static void AddConfig(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.ConfigureStartupConfig<MongodbHostConfig>(configuration.GetSection("MongodbHostConfig"));
-            services.ConfigureStartupConfig<OssClientConfig>(configuration.GetSection("OssClientConfig"));
-            services.ConfigureStartupConfig<AlibabaSmsConfig>(configuration.GetSection("AlibabaSmsConfig"));
         }
         /// <summary>
         /// 跨域
@@ -165,7 +149,7 @@ namespace NMS.RTIS.Web.StartupExtensions
                 options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddIdentityServerAuthentication(options =>
             {
-                options.Authority = "http://10.13.37.15:5000";
+                options.Authority = "http://10.13.37.15:8080";
                 options.RequireHttpsMetadata = false;
                 options.ApiName = "api";
                 options.Events = new JwtBearerEvents
@@ -197,8 +181,6 @@ namespace NMS.RTIS.Web.StartupExtensions
             {
                 // 忽略循环引用
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                //// 不使用驼峰
-                //options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 // 设置时间格式
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });

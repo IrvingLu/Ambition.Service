@@ -15,6 +15,11 @@ namespace NMS.RTIS.Domain.Patient
         /// </summary>
         public string Phone { get; set; }
 
+        /// <summary>
+        /// 性别
+        /// </summary>
+        public int Sex { get; set; }
+
         public Patient(string name, string phone = null)
         {
             Name = name;

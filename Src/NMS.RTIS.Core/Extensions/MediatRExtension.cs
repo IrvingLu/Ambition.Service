@@ -1,11 +1,10 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NMS.RTIS.Core.Abstractions;
-using NMS.RTIS.Domain;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NMS.RTIS.Infrastructure.Extensions
+namespace NMS.RTIS.Core.Extensions
 {
     /// <summary>
     /// 功能描述    ：MediatRExtension  

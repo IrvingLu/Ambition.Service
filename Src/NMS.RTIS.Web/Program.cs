@@ -29,7 +29,7 @@ namespace NMS.RTIS.Web
                     {
                         options.Limits.MinRequestBodyDataRate = null;//½â¾ö
                         options.AddServerHeader = false;
-                        options.Listen(IPAddress.Any, 80);
+                        options.Listen(IPAddress.Any, 8080);
                     });
                 })
             .UseSerilog()
@@ -66,7 +66,5 @@ namespace NMS.RTIS.Web
             };
         }
         #endregion
-
     }
-
 }

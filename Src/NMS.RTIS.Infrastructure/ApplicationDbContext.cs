@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using NMS.RTIS.Core.Abstractions;
+using NMS.RTIS.Core.Extensions;
 using NMS.RTIS.Domain.Identity;
 using NMS.RTIS.Infrastructure.Core;
 using NMS.RTIS.Infrastructure.EntityTypeConfiguration;
-using NMS.RTIS.Infrastructure.Extensions;
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +27,7 @@ namespace NMS.RTIS.Infrastructure.EntityFrameworkCore
     {
         public IConfiguration Configuration { get; }
         protected IMediator _mediator;
+
         #region Ctor
         public ApplicationDbContext(IConfiguration configuration, IMediator mediator)
         {
@@ -40,6 +43,7 @@ namespace NMS.RTIS.Infrastructure.EntityFrameworkCore
         #region 数据库
 
         public DbSet<Domain.Patient.Patient> Patient { get; set; }
+        public DbSet<Domain.Patient.PatientPlan> PatientPlan { get; set; }
 
         #endregion
 
@@ -58,8 +62,6 @@ namespace NMS.RTIS.Infrastructure.EntityFrameworkCore
             #endregion
             base.OnModelCreating(modelBuilder);
         }
-
-
         #endregion
 
         #region ITransaction

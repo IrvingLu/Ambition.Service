@@ -41,17 +41,18 @@ namespace NMS.RTIS.Infrastructure.Repositories
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual Task AddAsync(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
-            return Task.FromResult(Entities.AddAsync(entity));
+            entity.CreateTime = System.DateTime.Now;
+            await Entities.AddAsync(entity);
         }
         /// <summary>
         /// 多条新增
         /// </summary>
         /// <param name="entities">Entities</param>
-        public virtual Task AddEnumerableAsync(IEnumerable<TEntity> entities)
+        public async Task AddEnumerableAsync(IEnumerable<TEntity> entities)
         {
-            return Task.FromResult(Entities.AddRangeAsync(entities));
+            await Entities.AddRangeAsync(entities);
         }
         /// <summary>
         /// 更新
@@ -60,6 +61,7 @@ namespace NMS.RTIS.Infrastructure.Repositories
         /// <returns></returns>
         public virtual Task UpdateAsync(TEntity entity)
         {
+            entity.UpdateTime = System.DateTime.Now;
             return Task.FromResult(Entities.Update(entity));
         }
         /// <summary>
@@ -69,6 +71,7 @@ namespace NMS.RTIS.Infrastructure.Repositories
         /// <returns></returns>
         public virtual Task RemoveAsync(TEntity entity)
         {
+            entity.UpdateTime = System.DateTime.Now;
             return Task.FromResult(Entities.Remove(entity));
         }
     }
