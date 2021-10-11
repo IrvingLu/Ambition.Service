@@ -2,7 +2,7 @@
 using NMS.RTIS.Core.Enums;
 using NMS.RTIS.Core.Middleware;
 using NMS.RTIS.Infrastructure;
-using NMS.RTIS.Web.Appliccation.SignalrRHub;
+using NMS.RTIS.Service.SignalrRHub;
 using System.Linq;
 
 namespace NMS.RTIS.Web.StartupExtensions

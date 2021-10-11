@@ -1,4 +1,4 @@
-﻿namespace NMS.RTIS.Web.Application.File
+﻿namespace NMS.RTIS.Service.File
 {
     public interface IFileService
     {

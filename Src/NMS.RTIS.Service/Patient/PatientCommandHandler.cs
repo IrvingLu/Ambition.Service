@@ -8,11 +8,11 @@
 using AutoMapper;
 using MediatR;
 using NMS.RTIS.Infrastructure.Repositories;
-using NMS.RTIS.Web.Application.Patient.Command;
+using NMS.RTIS.Service.Patient.Command;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NMS.RTIS.Web.Application.Patient
+namespace NMS.RTIS.Service.Patient
 {
     public class PatientCommandHandler : IRequestHandler<CreatePatientCommand, Unit>, IRequestHandler<UpdatePatientCommand, Unit>, IRequestHandler<DeletePatientCommand, Unit>
     {
@@ -58,8 +58,7 @@ namespace NMS.RTIS.Web.Application.Patient
         /// <returns></returns>
         public async Task<Unit> Handle(DeletePatientCommand request, CancellationToken cancellationToken)
         {
-            var data= await _patientRepository.FindByIdAsync(request.Id);
-            await _patientRepository.RemoveAsync(data);
+            await _patientRepository.SoftDeleteAsync(request.Id);
             await _patientRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
             return new Unit();
         }

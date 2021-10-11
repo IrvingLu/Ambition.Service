@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NMS.RTIS.Core.BaseDto;
 using NMS.RTIS.Core.Extensions;
-using NMS.RTIS.Web.Application.Patient.Command;
+using NMS.RTIS.Service.Patient.Command;
 using System.Threading.Tasks;
 
 namespace NMS.RTIS.Web.Controllers.Patient

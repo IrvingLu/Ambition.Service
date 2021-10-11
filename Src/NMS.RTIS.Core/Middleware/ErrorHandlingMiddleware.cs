@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NMS.RTIS.Core.ApiResult;
+using NMS.RTIS.Core.Tools;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NMS.RTIS.Core.Middleware
@@ -27,6 +30,7 @@ namespace NMS.RTIS.Core.Middleware
         {
             try
             {
+                CallContext.SetData("userName", context.User?.Identity?.Name);
                 if (!context.Response.HasStarted)
                 {
                     await _next.Invoke(context);
@@ -38,6 +42,12 @@ namespace NMS.RTIS.Core.Middleware
                 var statusCode = 800;
                 await HandleExceptionAsync(context, statusCode, ex.Message);
             }
+            ///并发异常，数据已经被修改
+            catch (DbUpdateConcurrencyException)
+            {
+                var statusCode = 801;
+                await HandleExceptionAsync(context, statusCode, "Data has been modified");
+            }
             //代码异常
             catch (Exception ex)
             {
@@ -45,6 +55,7 @@ namespace NMS.RTIS.Core.Middleware
                 var statusCode = 500;
                 await HandleExceptionAsync(context, statusCode, "Server Error");
             }
+
         }
         //异常错误信息捕获，将错误信息用Json方式返回
         private static Task HandleExceptionAsync(HttpContext context, int statusCode, string msg = "")

@@ -1,4 +1,5 @@
-﻿using NMS.RTIS.Core.Abstractions;
+﻿using Microsoft.EntityFrameworkCore;
+using NMS.RTIS.Core.Abstractions;
 using NMS.RTIS.Domain.Patient.Events;
 
 namespace NMS.RTIS.Domain.Patient
@@ -6,18 +7,13 @@ namespace NMS.RTIS.Domain.Patient
 
     public class Patient : Entity, IAggregateRoot
     {
-        /// <summary>
-        /// 患者名称
-        /// </summary>
+        [Comment("患者姓名")]
         public string Name { get; set; }
-        /// <summary>
-        /// 联系方式
-        /// </summary>
+
+        [Comment("联系方式")]
         public string Phone { get; set; }
 
-        /// <summary>
-        /// 性别
-        /// </summary>
+        [Comment("性别")]
         public int Sex { get; set; }
 
 

@@ -1,7 +1,7 @@
 ﻿using IdentityModel.Client;
 using MediatR;
 
-namespace NMS.RTIS.Web.Application.Auth.Command
+namespace NMS.RTIS.Service.Auth.Command
 {
     /// <summary>
     /// 功能描述    ：用户名密码登录

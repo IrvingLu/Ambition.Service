@@ -1,6 +1,6 @@
 ﻿namespace NMS.RTIS.Service
 {
-    public class ServiceStartup
+    public static class ServiceStartup
     {
     }
 }

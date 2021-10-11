@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using NMS.RTIS.Infrastructure.EntityFrameworkCore;
 using NMS.RTIS.Infrastructure.Repositories;
-using NMS.RTIS.Web.Application.File;
+using NMS.RTIS.Service.File;
 using Module = Autofac.Module;
 
 namespace NMS.RTIS.Web.Infrastructure

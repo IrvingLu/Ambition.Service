@@ -51,9 +51,9 @@ namespace NMS.RTIS.Infrastructure
         /// <returns></returns>
         private static async Task<ApplicationUser> CreateDefaultUser(UserManager<ApplicationUser> userManager)
         {
-            var user = new ApplicationUser { Email = "18504029848@163.com", UserName = "admin" };
-            await userManager.CreateAsync(user, "meiyoumima");
-            var createdUser = await userManager.FindByEmailAsync("18504029848@163.com");
+            var user = new ApplicationUser { Email = "neusoft@neusoft.com", UserName = "admin" };
+            await userManager.CreateAsync(user, "neusoft");
+            var createdUser = await userManager.FindByEmailAsync("neusoft@neusoft.com");
             return createdUser;
         }
         /// <summary>

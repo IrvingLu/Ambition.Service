@@ -61,5 +61,10 @@ namespace NMS.RTIS.Core.Tools
             int num = rd.Next(100000, 1000000);
             return num;
         }
+        public static string GenerateTimeStamp()
+        {
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalSeconds).ToString();
+        }
     }
 }

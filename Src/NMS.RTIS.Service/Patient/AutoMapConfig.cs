@@ -6,10 +6,10 @@
 ***********************************************************************/
 
 using AutoMapper;
-using NMS.RTIS.Web.Application.Patient.Command;
-using NMS.RTIS.Web.Application.Patient.Dto;
+using NMS.RTIS.Service.Patient.Command;
+using NMS.RTIS.Service.Patient.Dto;
 
-namespace NMS.RTIS.Web.Application.Patient
+namespace NMS.RTIS.Service.Patient
 {
     public class AutoMapConfig : Profile
     {

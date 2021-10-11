@@ -44,7 +44,7 @@ namespace NMS.RTIS.Web.StartupExtensions
             services.AddCorsConfig();//跨域配置
             services.AddIdentityOptions();//身份认证配置
             services.AddAutoMapper(typeof(ServiceStartup));//automapper
-            services.AddMediatR(typeof(ServiceStartup));//CQRS
+            services.AddMediatR(typeof(ServiceStartup).Assembly);//CQRS
             services.AddHealthChecks();//健康检查
             services.AddSignalR();//SignalR
             services.AddController();//api控制器

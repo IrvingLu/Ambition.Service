@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using NMS.RTIS.Core.BaseDto;
-using NMS.RTIS.Web.Application.Patient.Dto;
+using NMS.RTIS.Service.Patient.Dto;
 using System;
 
-namespace NMS.RTIS.Web.Application.Patient.Command
+namespace NMS.RTIS.Service.Patient.Command
 {
     public class PatientDetailCommand : EntityDto, IRequest<PatientDetailDto>
     {

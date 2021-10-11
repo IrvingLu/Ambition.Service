@@ -2,7 +2,7 @@
 using NMS.RTIS.Core.BaseDto;
 using System;
 
-namespace NMS.RTIS.Web.Application.Patient.Command
+namespace NMS.RTIS.Service.Patient.Command
 {
     public class DeletePatientCommand:EntityDto,IRequest
     {

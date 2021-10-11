@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using NMS.RTIS.Core.Middleware;
-using NMS.RTIS.Web.Application.Auth.Command;
+using NMS.RTIS.Service.Auth.Command;
 using System.Threading.Tasks;
 
 namespace NMS.RTIS.Web.Controllers.Auth

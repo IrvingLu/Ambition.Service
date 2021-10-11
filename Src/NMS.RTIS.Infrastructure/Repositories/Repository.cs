@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NMS.RTIS.Core.Abstractions;
+using NMS.RTIS.Core.Tools;
 using NMS.RTIS.Infrastructure.Core;
 using NMS.RTIS.Infrastructure.EntityFrameworkCore;
 using System;
@@ -12,30 +13,21 @@ namespace NMS.RTIS.Infrastructure.Repositories
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         protected virtual ApplicationDbContext DbContext { get; set; }
-        public virtual IUnitOfWork UnitOfWork => (IUnitOfWork)DbContext;
+        public virtual IUnitOfWork UnitOfWork => DbContext;
         /// <summary>
         /// 列表
         /// </summary>
-        public virtual IQueryable<TEntity> Table => DbContext.Set<TEntity>();
+        public virtual IQueryable<TEntity> Table => DbContext.Set<TEntity>().Where(c => !c.IsDelete);
         /// <summary>
         ///列表 AsNoTracking
         /// </summary>
-        public virtual IQueryable<TEntity> TableNoTracking => DbContext.Set<TEntity>().AsNoTracking();
+        public virtual IQueryable<TEntity> TableNoTracking => DbContext.Set<TEntity>().AsNoTracking().Where(c => !c.IsDelete);
         private DbSet<TEntity> _entities;
         protected virtual DbSet<TEntity> Entities => _entities ??= DbContext.Set<TEntity>();
 
         public Repository(ApplicationDbContext context)
         {
-            this.DbContext = context;
-        }
-        /// <summary>
-        /// 详情
-        /// </summary>
-        /// <param name="id">Identifier</param>
-        /// <returns>Entity</returns>
-        public async Task<TEntity> FindByIdAsync(object id)
-        {
-            return await Entities.FindAsync(id);
+            DbContext = context;
         }
         /// <summary>
         /// 新增
@@ -44,18 +36,14 @@ namespace NMS.RTIS.Infrastructure.Repositories
         /// <returns></returns>
         public async Task AddAsync(TEntity entity)
         {
-            var rowVersion = System.Text.Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
-            entity.SetRowVersion(rowVersion);
-            entity.CreateTime = DateTime.Now;
-            var ss = await Entities.AddAsync(entity);
+            await Entities.AddAsync(entity);
         }
         /// <summary>
         /// 多条新增
         /// </summary>
         /// <param name="entities">Entities</param>
-        public async Task AddEnumerableAsync(IEnumerable<TEntity> entities)
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
-            entities = entities.Select(f => { f.CreateTime = DateTime.Now; return f; });
             await Entities.AddRangeAsync(entities);
         }
         /// <summary>
@@ -65,22 +53,37 @@ namespace NMS.RTIS.Infrastructure.Repositories
         /// <returns></returns>
         public virtual Task UpdateAsync(TEntity entity)
         {
-            var rowVersion = System.Text.Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
-            entity.SetRowVersion(rowVersion);
-            entity.UpdateTime = DateTime.Now;
             return Task.FromResult(Entities.Update(entity));
         }
         /// <summary>
-        /// 物理删除
+        /// 多条新增
+        /// </summary>
+        /// <param name="entities">Entities</param>
+        public async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
+        {
+            Entities.UpdateRange(entities);
+            await Task.CompletedTask;
+        }
+        /// <summary>
+        /// 单条删除(物理删除)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual Task RemoveAsync(TEntity entity)
+        public async Task DeleteAsync(object id)
         {
-            var rowVersion = System.Text.Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
-            entity.SetRowVersion(rowVersion);
-            entity.UpdateTime = DateTime.Now;
-            return Task.FromResult(Entities.Remove(entity));
+            var entity = await Entities.FindAsync(id);
+            Entities.Remove(entity);
+        }
+        /// <summary>
+        /// 单条删除(逻辑删除)
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public async Task SoftDeleteAsync(object id)
+        {
+            var entity = await Entities.FindAsync(id);
+            entity.IsDelete = true;
+            await UpdateAsync(entity);
         }
     }
 }

@@ -12,5 +12,7 @@ namespace NMS.RTIS.Core.BaseDto
     public class EntityDto
     {
         public Guid Id { get; set; }
+
+        public byte[] RowVersion { get; set; }
     }
 }

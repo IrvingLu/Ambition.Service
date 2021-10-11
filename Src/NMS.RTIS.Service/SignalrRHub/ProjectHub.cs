@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace NMS.RTIS.Web.Appliccation.SignalrRHub
+namespace NMS.RTIS.Service.SignalrRHub
 {
     public class ProjectHub : Hub
     {

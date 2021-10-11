@@ -1,14 +1,12 @@
-﻿using NMS.RTIS.Core.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using NMS.RTIS.Core.Abstractions;
 
 namespace NMS.RTIS.Domain.Patient
 {
-   public class PatientPlan:Entity
+    public class PatientPlan:Entity
     {
+
+        [Comment("计划名称")]
         public string PlanName { get; set; }
     }
 }

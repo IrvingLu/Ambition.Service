@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NMS.RTIS.Core.Abstractions
 {
@@ -13,33 +16,27 @@ namespace NMS.RTIS.Core.Abstractions
     /// </summary>
     public abstract class Entity
     {
-        /// <summary>
-        /// 主键
-        /// </summary>
+        [Comment("主键")]
         public Guid Id { get; set; }
-        /// <summary>
-        /// 是否被删除
-        /// </summary>
+
+        [Comment("是否被删除")]
         public bool IsDelete { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
+
+        [Comment("创建用户")]
+        public string CreateUserName { get; set; }
+
+        [Comment("创建时间")]
         public DateTime CreateTime { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
+
+        [Comment("更新用户")]
+        public string UpdateUserName { get; set; }
+
+        [Comment("更新时间")]
         public DateTime? UpdateTime { get; set; }
 
-        /// <summary>
-        /// 时间戳/行版本,并发令牌
-        /// </summary>
-        [Timestamp]
+        [Comment("数据行版本号")]
+        [ConcurrencyCheck]
         public byte[] RowVersion { get; set; }
-
-        public void SetRowVersion(byte[] rowVersion)
-        {
-            RowVersion = rowVersion;
-        }
 
         //表示对象是否为全新创建的，未持久化的
         public bool IsTransient()

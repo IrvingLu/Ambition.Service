@@ -1,12 +1,12 @@
 ﻿using IdentityModel.Client;
 using MediatR;
 using Microsoft.Extensions.Configuration;
-using NMS.RTIS.Web.Application.Auth.Command;
+using NMS.RTIS.Service.Auth.Command;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NMS.RTIS.Web.Application.Auth
+namespace NMS.RTIS.Service.Auth
 {
     /// <summary>
     /// 功能描述    ：登录认证
