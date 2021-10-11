@@ -5,8 +5,8 @@
 *使用说明    ：命令
 ***********************************************************************/
 
-using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NMS.RTIS.Infrastructure.Repositories;
 using NMS.RTIS.Service.Patient.Command;
 using System.Threading;
@@ -17,12 +17,10 @@ namespace NMS.RTIS.Service.Patient
     public class PatientCommandHandler : IRequestHandler<CreatePatientCommand, Unit>, IRequestHandler<UpdatePatientCommand, Unit>, IRequestHandler<DeletePatientCommand, Unit>
     {
         private readonly IRepository<Domain.Patient.Patient> _patientRepository;
-        private readonly IMapper _mapper;
 
-        public PatientCommandHandler(IRepository<Domain.Patient.Patient> patientRepository, IMapper mapper)
+        public PatientCommandHandler(IRepository<Domain.Patient.Patient> patientRepository)
         {
             _patientRepository = patientRepository;
-            _mapper = mapper;
         }
         /// <summary>
         /// 添加患者信息
@@ -45,8 +43,9 @@ namespace NMS.RTIS.Service.Patient
         /// <returns></returns>
         public async Task<Unit> Handle(UpdatePatientCommand request, CancellationToken cancellationToken)
         {
-            var result = _mapper.Map<Domain.Patient.Patient>(request);
-            await _patientRepository.UpdateAsync(result);
+            var data = await _patientRepository.TableNoTracking.FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
+            data.Name = request.Name;
+            await _patientRepository.UpdateAsync(data);
             await _patientRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
             return new Unit();
         }

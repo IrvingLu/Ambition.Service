@@ -58,7 +58,7 @@ namespace NMS.RTIS.Service.Patient
         {
             //const string Sql = "SELECT * FROM dbo.\"Patient\" WHERE Id=@Id";
             //var data = await _dapper.QueryFirstAsync<Domain.Patient.Patient>(Sql, new { request.Id });
-            var data = await _patientRepository.TableNoTracking.Where(c=>c.Id==request.Id).FirstOrDefaultAsync();
+            var data = await _patientRepository.TableNoTracking.Where(c=>c.Id==request.Id).FirstOrDefaultAsync(cancellationToken: cancellationToken);
             var result = _mapper.Map<PatientDetailDto>(data);
             return result;
         }

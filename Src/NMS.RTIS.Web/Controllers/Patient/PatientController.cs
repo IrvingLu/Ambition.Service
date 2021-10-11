@@ -47,7 +47,7 @@ namespace NMS.RTIS.Web.Controllers.Patient
   
         public async Task<IActionResult> GetPatients([FromQuery] PatientsCommand command)
         {
-            var userId = User.GetUserId();
+            //var userId = User.GetUserId();
             var result = await _mediator.Send(command);
             //result = null;
             //var ss = result.Data;

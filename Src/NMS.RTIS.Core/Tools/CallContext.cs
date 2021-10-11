@@ -5,7 +5,7 @@ namespace NMS.RTIS.Core.Tools
 {
     public static class CallContext
     {
-        static ConcurrentDictionary<string, AsyncLocal<object>> state = new ConcurrentDictionary<string, AsyncLocal<object>>();
+        static readonly ConcurrentDictionary<string, AsyncLocal<object>> state = new();
 
         public static void SetData(string name, object data) =>
             state.GetOrAdd(name, _ => new AsyncLocal<object>()).Value = data;

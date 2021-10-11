@@ -1,6 +1,5 @@
 ﻿using IdentityModel.Client;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using NMS.RTIS.Service.Auth.Command;
 using System.Net.Http;
 using System.Threading;
@@ -17,12 +16,6 @@ namespace NMS.RTIS.Service.Auth
     /// </summary>
     public class AuthCommandHandler : IRequestHandler<LoginCommand, TokenResponse>
     {
-        private readonly IConfiguration _configuration;
-
-        public AuthCommandHandler(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
         /// <summary>
         /// 登录
         /// </summary>
