@@ -1,4 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Domain.Identity
+*
+* 功  能：用户类
+* 类  名：ApplicationUser
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NMS.RTIS.Core.Abstractions;
 using System.Collections.Generic;
@@ -7,45 +19,30 @@ namespace NMS.RTIS.Domain.Identity
 {
     public class ApplicationUser : IdentityUser
     {
-        /// <summary>
-        /// 昵称
-        /// </summary>
+        [Comment("昵称")]
         public string NickName { get; set; }
 
-        /// <summary>
-        /// 头像
-        /// </summary>
+        [Comment("头像")]
         public string Avatar { get; set; }
 
-        /// <summary>
-        /// 用户地址
-        /// </summary>
+        [Comment("地址")]
         public Address Address { get; set; }
     }
 
     [Owned]
     public class Address:ValueObject
     {
-        /// <summary>
-        /// 省份
-        /// </summary>
+        [Comment("省份")]
         public string Province { get; private set; }
 
-        /// <summary>
-        /// 城市
-        /// </summary>
+        [Comment("城市")]
         public string City { get; private set; }
 
-        /// <summary>
-        /// 区县
-        /// </summary>
+        [Comment("区县")]
         public string County { get; private set; }
 
-        /// <summary>
-        /// 街道
-        /// </summary>
+        [Comment("街道")]
         public string Street { get; private set; }
-
 
         public Address() { }
         public Address(string province, string city, string county, string street)
@@ -55,7 +52,6 @@ namespace NMS.RTIS.Domain.Identity
             this.County = county;
             this.Street = street;
         }
-
         protected override IEnumerable<object> GetAtomicValues()
         {
             throw new System.NotImplementedException();

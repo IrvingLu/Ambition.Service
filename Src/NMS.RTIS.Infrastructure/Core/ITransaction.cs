@@ -1,15 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Infrastructure.Core
+*
+* 功  能：事务接口
+* 类  名：ITransaction
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Threading.Tasks;
 
 namespace NMS.RTIS.Infrastructure.Core
 {
-    /// <summary>
-    /// 功能描述    ：ITransaction  
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/2/5 15:01:50 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/2/5 15:01:50 
-    /// </summary>
     public interface ITransaction
     {
         IDbContextTransaction GetCurrentTransaction();

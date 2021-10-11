@@ -1,21 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.Abstractions
+*
+* 功  能：基础实体类
+* 类  名：Entity
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NMS.RTIS.Core.Abstractions
 {
-    /// <summary>
-    /// 功能描述    ：基础实体
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public abstract class Entity
     {
+        #region Base
+
         [Comment("主键")]
         public Guid Id { get; set; }
 
@@ -38,12 +43,7 @@ namespace NMS.RTIS.Core.Abstractions
         [ConcurrencyCheck]
         public byte[] RowVersion { get; set; }
 
-        //表示对象是否为全新创建的，未持久化的
-        public bool IsTransient()
-        {
-            return EqualityComparer<Guid>.Default.Equals(Id, default);
-        }
-
+        #endregion
 
         #region DomainEvent 
         private List<IDomainEvent> _domainEvents;

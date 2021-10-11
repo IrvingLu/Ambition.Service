@@ -1,4 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Infrastructure
+*
+* 功  能：初始化数据
+* 类  名：DbContextSeed
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NMS.RTIS.Domain.Identity;
 using NMS.RTIS.Infrastructure.EntityFrameworkCore;
@@ -7,13 +19,6 @@ using System.Threading.Tasks;
 
 namespace NMS.RTIS.Infrastructure
 {
-    /// <summary>
-    /// 功能描述    ：初始化数据
-    /// 创 建 者    ：Seven
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public class DbContextSeed
     {
         /// <summary>

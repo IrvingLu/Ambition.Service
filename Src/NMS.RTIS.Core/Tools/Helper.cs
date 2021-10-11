@@ -1,16 +1,21 @@
-﻿using System;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.Tools
+*
+* 功  能：静态类
+* 类  名：Helper
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using System;
 using System.Reflection;
 using System.Text;
 
 namespace NMS.RTIS.Core.Tools
 {
-    /// <summary>
-    /// 功能描述    ：静态类
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public static class Helper
     {
         /// <summary>
@@ -61,6 +66,10 @@ namespace NMS.RTIS.Core.Tools
             int num = rd.Next(100000, 1000000);
             return num;
         }
+        /// <summary>
+        /// 获取当前时间戳
+        /// </summary>
+        /// <returns></returns>
         public static string GenerateTimeStamp()
         {
             TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);

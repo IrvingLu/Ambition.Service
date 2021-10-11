@@ -1,15 +1,20 @@
-﻿using MediatR;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.Abstractions
+*
+* 功  能：领域事件
+* 类  名：IDomainEvent
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using MediatR;
 
 namespace NMS.RTIS.Core.Abstractions
 {
-    /// <summary>
-    /// 功能描述    ：IDomainEvent  
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/2/5 9:40:48 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/2/5 9:40:48 
-    /// </summary>
-    public interface IDomainEvent: INotification
+    public interface IDomainEvent : INotification
     {
     }
 }

@@ -1,14 +1,19 @@
-﻿using System;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.Redis
+*
+* 功  能：Redis接口
+* 类  名：ICsRedisHelper
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using System;
 
 namespace NMS.RTIS.Core.Redis
 {
-    /// <summary>
-    /// 功能描述    ：redis
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public interface ICsRedisHelper
     {
         /// <summary>

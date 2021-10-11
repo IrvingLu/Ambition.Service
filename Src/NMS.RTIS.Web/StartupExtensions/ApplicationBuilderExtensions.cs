@@ -1,4 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Web.StartupExtensions
+*
+* 功  能：ApplicationBuilder扩展
+* 类  名：ApplicationBuilderExtensions
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.AspNetCore.Builder;
 using NMS.RTIS.Core.Enums;
 using NMS.RTIS.Core.Middleware;
 using NMS.RTIS.Infrastructure;
@@ -7,16 +19,8 @@ using System.Linq;
 
 namespace NMS.RTIS.Web.StartupExtensions
 {
-    /// <summary>
-    /// 功能描述    ：ApplicationBuilder扩展
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public static class ApplicationBuilderExtensions
     {
-
         public static IApplicationBuilder UseConfig(this IApplicationBuilder app)
         {
             app.UseRouting();
@@ -35,8 +39,10 @@ namespace NMS.RTIS.Web.StartupExtensions
             DbContextSeed.SeedAsync(app.ApplicationServices).Wait();//启动初始化数据
             return app;
         }
-
-
+        /// <summary>
+        /// Swagger文档配置
+        /// </summary>
+        /// <param name="app"></param>
         public static void UseSwaggerInfo(this IApplicationBuilder app)
         {
             app.UseSwagger();
@@ -44,16 +50,12 @@ namespace NMS.RTIS.Web.StartupExtensions
             {
                 typeof(ApiVersionEnum).GetEnumNames().ToList().ForEach(version =>
                 {
-#if DEBUG
                     c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{version}");
-#else
-                    c.SwaggerEndpoint($"./swagger/{version}/swagger.json", $"{version}");
-#endif
                 });
             });
         }
         /// <summary>
-        /// 异常处理中间件
+        /// api处理中间件
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>

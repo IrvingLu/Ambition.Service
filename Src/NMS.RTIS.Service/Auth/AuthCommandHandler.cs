@@ -1,4 +1,16 @@
-﻿using IdentityModel.Client;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Service.Auth
+*
+* 功  能：登录认证逻辑类
+* 类  名：AuthCommandHandler
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using IdentityModel.Client;
 using MediatR;
 using NMS.RTIS.Service.Auth.Command;
 using System.Net.Http;
@@ -7,17 +19,10 @@ using System.Threading.Tasks;
 
 namespace NMS.RTIS.Service.Auth
 {
-    /// <summary>
-    /// 功能描述    ：登录认证
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public class AuthCommandHandler : IRequestHandler<LoginCommand, TokenResponse>
     {
         /// <summary>
-        /// 登录
+        /// 登录（用户名密码）
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>

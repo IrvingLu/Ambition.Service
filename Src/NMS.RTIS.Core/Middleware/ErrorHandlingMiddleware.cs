@@ -1,22 +1,26 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.Middleware
+*
+* 功  能：api处理中间件
+* 类  名：ErrorHandlingMiddleware
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NMS.RTIS.Core.ApiResult;
 using NMS.RTIS.Core.Tools;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NMS.RTIS.Core.Middleware
 {
-    /// <summary>
-    /// 功能描述    ：全剧异常处理中间件
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
@@ -30,6 +34,7 @@ namespace NMS.RTIS.Core.Middleware
         {
             try
             {
+                //添加线程变量
                 CallContext.SetData("userName", context.User?.Identity?.Name);
                 if (!context.Response.HasStarted)
                 {
@@ -42,7 +47,7 @@ namespace NMS.RTIS.Core.Middleware
                 var statusCode = 800;
                 await HandleExceptionAsync(context, statusCode, ex.Message);
             }
-            ///并发异常，数据已经被修改
+            //并发异常，数据已经被修改
             catch (DbUpdateConcurrencyException)
             {
                 var statusCode = 801;
@@ -73,6 +78,9 @@ namespace NMS.RTIS.Core.Middleware
         }
 
     }
+    /// <summary>
+    /// 内部异常
+    /// </summary>
     public class InternalException : Exception
     {
         public InternalException(string msg) : base(msg)

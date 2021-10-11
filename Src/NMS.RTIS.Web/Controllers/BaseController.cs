@@ -1,17 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Web.Controllers
+*
+* 功  能：基础Controller，封装返回对象
+* 类  名：BaseController
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using NMS.RTIS.Core.ApiResult;
 
 namespace NMS.RTIS.Web.Controllers
 {
-    /// <summary>
-    /// 功能描述    ：自定义Controller
-    /// 创 建 者    ：Seven
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public class BaseController : ControllerBase
     {
         /// <summary>

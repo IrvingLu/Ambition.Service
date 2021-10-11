@@ -1,4 +1,16 @@
-﻿using Dapper;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Infrastructure.Dapper
+*
+* 功  能：Dapper封装
+* 类  名：DapperQuery
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Dapper;
 using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 using System.Collections.Generic;
@@ -6,13 +18,6 @@ using System.Threading.Tasks;
 
 namespace NMS.RTIS.Infrastructure.Dapper
 {
-    /// <summary>
-    /// 功能描述    ：Dapper封装
-    /// 创 建 者    ：Seven
-    /// 创建日期    ：2020/12/29 16:33:12 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2020/12/29 16:33:12 
-    /// </summary>
     public class DapperQuery: IDapperQuery
     {
         private readonly IConfiguration _configuration;
@@ -54,6 +59,5 @@ namespace NMS.RTIS.Infrastructure.Dapper
             using MySqlConnection con = new MySqlConnection(connectionString);
             return await con.QueryFirstOrDefaultAsync<TEntity>(sql, param);
         }
-
     }
 }

@@ -1,8 +1,8 @@
 ﻿/**********************************************************************
 * 命名空间：NMS.RTIS.Core.BaseDto
 *
-* 功  能：实体传输对象
-* 类  名：EntityDto
+* 功  能：分页基础实体
+* 类  名：PageEntity
 * 日  期：2021/10/11 14:44:32
 * 负责人：lu-shuai
 *
@@ -10,20 +10,18 @@
 *
 **********************************************************************/
 
-using System;
-
 namespace NMS.RTIS.Core.BaseDto
 {
-    public class EntityDto
+    public abstract class PageEntityDto
     {
         /// <summary>
-        /// 主键
+        /// 第几个页面
         /// </summary>
-        public Guid Id { get; set; }
+        public int PageIndex { get; set; }
 
         /// <summary>
-        /// 数据版本
+        /// 页面显示多少
         /// </summary>
-        public byte[] RowVersion { get; set; }
+        public int PageSize { get; set; }
     }
 }

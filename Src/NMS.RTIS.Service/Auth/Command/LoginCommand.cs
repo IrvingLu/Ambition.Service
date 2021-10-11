@@ -1,15 +1,20 @@
-﻿using IdentityModel.Client;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Service.Auth.Command
+*
+* 功  能：用户名密码登录
+* 类  名：LoginCommand
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using IdentityModel.Client;
 using MediatR;
 
 namespace NMS.RTIS.Service.Auth.Command
 {
-    /// <summary>
-    /// 功能描述    ：用户名密码登录
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public class LoginCommand: IRequest<TokenResponse>
     {
         /// <summary>

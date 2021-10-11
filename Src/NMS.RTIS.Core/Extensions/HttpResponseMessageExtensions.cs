@@ -1,17 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.Extensions
+*
+* 功  能：HttpResponse扩展方法
+* 类  名：HttpResponse
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace NMS.RTIS.Core.Extensions
 {
-    /// <summary>
-    /// 功能描述    ：HttpResponse扩展
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public static class HttpResponseMessageExtensions
     {
         /// <summary>
@@ -25,7 +30,6 @@ namespace NMS.RTIS.Core.Extensions
             var json = await httpResponseMessage.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(json);
         }
-
         /// <summary>
         /// 将结果转为json格式
         /// </summary>

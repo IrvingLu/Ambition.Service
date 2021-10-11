@@ -1,9 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Infrastructure.Repositories
+*
+* 功  能：仓储
+* 类  名：Repository
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.EntityFrameworkCore;
 using NMS.RTIS.Core.Abstractions;
-using NMS.RTIS.Core.Tools;
 using NMS.RTIS.Infrastructure.Core;
 using NMS.RTIS.Infrastructure.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

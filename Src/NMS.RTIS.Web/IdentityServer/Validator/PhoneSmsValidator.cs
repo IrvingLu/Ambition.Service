@@ -1,4 +1,16 @@
-﻿using IdentityServer4.Models;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Web.IdentityServer.Validator
+*
+* 功  能：手机验证码登录
+* 类  名：PhoneSmsValidator
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using IdentityServer4.Models;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +21,6 @@ using System.Threading.Tasks;
 
 namespace Identity.Web.IdentityServer.Validator
 {
-    /// <summary>
-    /// 功能描述    ：手机验证码登录
-    /// 创 建 者    ：Seven
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public class PhoneSmsValidator : IExtensionGrantValidator
     {
         private readonly UserManager<ApplicationUser> _userManager;

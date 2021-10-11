@@ -1,15 +1,20 @@
-﻿using System.Collections.Generic;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Infrastructure.Dapper
+*
+* 功  能：Dapper封装接口
+* 类  名：IDapperQuery
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NMS.RTIS.Infrastructure.Dapper
 {
-    /// <summary>
-    /// 功能描述    ：IDapperQuery  
-    /// 创 建 者    ：Seven
-    /// 创建日期    ：2020/12/30 9:48:48 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2020/12/30 9:48:48 
-    /// </summary>
     public interface IDapperQuery
     {
         Task<int> ExecuteAsync(string sql);

@@ -1,15 +1,20 @@
-﻿using System.Collections.Generic;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.Abstractions
+*
+* 功  能：值对象
+* 类  名：ValueObject
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NMS.RTIS.Core.Abstractions
 {
-    /// <summary>
-    /// 功能描述    ：值对象
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public abstract class ValueObject
     {
         protected static bool EqualOperator(ValueObject left, ValueObject right)

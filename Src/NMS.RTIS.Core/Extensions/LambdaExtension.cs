@@ -1,4 +1,16 @@
-﻿using System;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.Extensions
+*
+* 功  能：Lambda扩展方法
+* 类  名：LambdaExtension
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;

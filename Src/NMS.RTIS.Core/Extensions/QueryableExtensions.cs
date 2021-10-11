@@ -1,4 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.Extensions
+*
+* 功  能：linq扩展方法
+* 类  名：QueryableExtensions
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.EntityFrameworkCore;
 using NMS.RTIS.Core.BaseDto;
 using System;
 using System.Linq;
@@ -7,13 +19,6 @@ using System.Threading.Tasks;
 
 namespace NMS.RTIS.Web.Core.Extensions
 {
-    /// <summary>
-    /// 功能描述    ：linq扩展
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public static class QueryableExtensions
     {
         /// <summary>

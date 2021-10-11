@@ -1,4 +1,16 @@
-﻿using MediatR;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Infrastructure.EntityFrameworkCore
+*
+* 功  能：EF上下文
+* 类  名：ApplicationDbContext
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using MediatR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -8,7 +20,6 @@ using NMS.RTIS.Core.Extensions;
 using NMS.RTIS.Core.Tools;
 using NMS.RTIS.Domain.Identity;
 using NMS.RTIS.Infrastructure.Core;
-using NMS.RTIS.Infrastructure.EntityTypeConfiguration;
 using System;
 using System.Linq;
 using System.Threading;
@@ -16,13 +27,6 @@ using System.Threading.Tasks;
 
 namespace NMS.RTIS.Infrastructure.EntityFrameworkCore
 {
-    /// <summary>
-    /// 功能描述    ：数据库上下文
-    /// 创 建 者    ：Seven
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>, IUnitOfWork, ITransaction
     {
         public IConfiguration Configuration { get; }

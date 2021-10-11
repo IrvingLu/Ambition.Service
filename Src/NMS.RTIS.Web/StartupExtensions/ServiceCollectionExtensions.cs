@@ -1,4 +1,16 @@
-﻿using Identity.Web.IdentityServer.Validator;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Web.StartupExtensions
+*
+* 功  能：依赖注入配置
+* 类  名：ServiceCollectionExtensions
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Identity.Web.IdentityServer.Validator;
 using IdentityServer4.AccessTokenValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,24 +35,19 @@ using System.Threading.Tasks;
 
 namespace NMS.RTIS.Web.StartupExtensions
 {
-    /// <summary>
-    /// 功能描述    ：服务配置
-    /// 创 建 者    ：Seven
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public static class ServiceCollectionExtensions
     {
-
+        /// <summary>
+        /// 依赖注入
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.ConfigureStartupConfig<MongodbHostConfig>(configuration.GetSection("MongodbHostConfig"));
-            services.ConfigureStartupConfig<OssClientConfig>(configuration.GetSection("OssClientConfig"));
-            services.ConfigureStartupConfig<AlibabaSmsConfig>(configuration.GetSection("AlibabaSmsConfig"));
+            services.ConfigureStartupConfig<MongodbHostConfig>(configuration.GetSection("MongodbHostConfig"));//配置文件
             RedisHelper.Initialization(new CSRedis.CSRedisClient(configuration.GetConnectionString("CsRedisCachingConnectionString")));  //redis配置
-            services.AddScoped<IUnitOfWork>(m => m.GetService<ApplicationDbContext>());
-            //services.AddDbContext<ApplicationDbContext>();
+            services.AddScoped<IUnitOfWork>(m => m.GetService<ApplicationDbContext>());//工作单元，上下文注入
             services.AddCorsConfig();//跨域配置
             services.AddIdentityOptions();//身份认证配置
             services.AddAutoMapper(typeof(ServiceStartup));//automapper
@@ -52,34 +59,6 @@ namespace NMS.RTIS.Web.StartupExtensions
             services.AddAuthService(configuration);//认证服务
             services.AddSwaggerInfo();
             return services;
-        }
-
-        /// <summary>
-        /// Swagger
-        /// </summary>
-        /// <param name="services"></param>
-        public static void AddSwaggerInfo(this IServiceCollection services) {
-
-            services.AddSwaggerGen(c =>
-            {
-                typeof(ApiVersionEnum).GetEnumNames().ToList().ForEach(version =>
-                {
-                    c.SwaggerDoc(version, new OpenApiInfo()
-                    {
-                        Title = $"{typeof(Startup).Namespace}",
-                        Version = version,
-                        Description = $"{version} 版本，可根据需要选择",
-                        Contact = new OpenApiContact
-                        {
-                            Name = "东软医疗系统股份有限公司",
-                            Email = "nms-admin@neusoftmedical.com",
-                            Url = new Uri("http://www.neusoftmedical.com/")
-                        },
-                    });
-                });
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{typeof(Startup).Namespace}" + ".xml");
-                c.IncludeXmlComments(xmlPath, true);
-            });
         }
         /// <summary>
         /// 跨域
@@ -182,7 +161,41 @@ namespace NMS.RTIS.Web.StartupExtensions
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
         }
+        /// <summary>
+        /// Swagger
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddSwaggerInfo(this IServiceCollection services)
+        {
 
+            services.AddSwaggerGen(c =>
+            {
+                typeof(ApiVersionEnum).GetEnumNames().ToList().ForEach(version =>
+                {
+                    c.SwaggerDoc(version, new OpenApiInfo()
+                    {
+                        Title = $"{typeof(Startup).Namespace}",
+                        Version = version,
+                        Description = $"{version} 版本，可根据需要选择",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "东软医疗系统股份有限公司",
+                            Email = "nms-admin@neusoftmedical.com",
+                            Url = new Uri("http://www.neusoftmedical.com/")
+                        },
+                    });
+                });
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{typeof(Startup).Namespace}" + ".xml");
+                c.IncludeXmlComments(xmlPath, true);
+            });
+        }
+        /// <summary>
+        /// config配置
+        /// </summary>
+        /// <typeparam name="TConfig"></typeparam>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         private static TConfig ConfigureStartupConfig<TConfig>(this IServiceCollection services, IConfiguration configuration) where TConfig : class, new()
         {
             //创建配置

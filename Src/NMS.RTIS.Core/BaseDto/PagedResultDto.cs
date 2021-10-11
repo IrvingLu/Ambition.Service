@@ -1,12 +1,17 @@
-﻿namespace NMS.RTIS.Core.BaseDto
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Core.BaseDto
+*
+* 功  能：分页返回对象
+* 类  名：PagedResultDto
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+namespace NMS.RTIS.Core.BaseDto
 {
-    /// <summary>
-    /// 功能描述    ：分页返回
-    /// 创 建 者    ：Seven
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/2/4 9:40:56 
-    /// </summary>
     public class PagedResultDto
     {
         public int TotalCount { get; set; }

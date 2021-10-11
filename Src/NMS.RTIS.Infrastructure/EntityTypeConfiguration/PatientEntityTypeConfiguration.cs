@@ -1,15 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Infrastructure.EntityTypeConfiguration
+*
+* 功  能：数据库映射配置
+* 类  名：PatientEntityTypeConfiguration
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace NMS.RTIS.Infrastructure.EntityTypeConfiguration
 {
-    /// <summary>
-    /// 功能描述    ：数据库映射配置
-    /// 创 建 者    ：Seven
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/1/12 9:40:56 
-    /// </summary>
     public class PatientEntityTypeConfiguration : IEntityTypeConfiguration<Domain.Patient.Patient>
     {
         public void Configure(EntityTypeBuilder<Domain.Patient.Patient> builder)

@@ -1,4 +1,14 @@
-﻿
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Web.IdentityServer
+*
+* 功  能：认证服务器配置文件
+* 类  名：IdentityConfig
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
 
 using IdentityServer4.Models;
 using NMS.RTIS.Domain.Identity;
@@ -7,13 +17,6 @@ using System.Security.Claims;
 
 namespace NMS.RTIS.Web.IdentityServer
 {
-    /// <summary>
-    /// 功能描述    ：认证服务器配置文件
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/2/4 9:40:56 
-    /// </summary>
     public class IdentityConfig
     {
         /// <summary>

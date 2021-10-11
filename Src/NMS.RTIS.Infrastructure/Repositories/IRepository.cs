@@ -1,4 +1,16 @@
-﻿using NMS.RTIS.Core.Abstractions;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Infrastructure.Repositories
+*
+* 功  能：仓储接口
+* 类  名：IRepository
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using NMS.RTIS.Core.Abstractions;
 using NMS.RTIS.Infrastructure.Core;
 using System.Collections.Generic;
 using System.Linq;

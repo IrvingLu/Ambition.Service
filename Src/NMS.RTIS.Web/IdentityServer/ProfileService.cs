@@ -1,4 +1,16 @@
-﻿using IdentityServer4.Models;
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Web.IdentityServer
+*
+* 功  能：提供和存储有关用户生成的用户的配置文件信息的服务
+* 类  名：ProfileService
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
+using IdentityServer4.Models;
 using IdentityServer4.Services;
 using System;
 using System.Linq;
@@ -6,13 +18,6 @@ using System.Threading.Tasks;
 
 namespace NMS.RTIS.Web.IdentityServer
 {
-    /// <summary>
-    /// 功能描述    ：提供和存储有关用户生成的用户的配置文件信息的服务
-    /// 创 建 者    ：鲁岩奇
-    /// 创建日期    ：2021/1/12 9:40:56 
-    /// 最后修改者  ：Administrator
-    /// 最后修改日期：2021/2/4 9:40:56 
-    /// </summary>
     public class ProfileService : IProfileService
     {
         /// <summary>

@@ -1,3 +1,15 @@
+/**********************************************************************
+* 命名空间：NMS.RTIS.Web
+*
+* 功  能：程序入口
+* 类  名：Program
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
+
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +45,9 @@ namespace NMS.RTIS.Web
             .UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
         #region log配置
+        /// <summary>
+        /// elk日志配置
+        /// </summary>
         private static void ConfigureLogging()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -46,6 +61,12 @@ namespace NMS.RTIS.Web
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
         }
+        /// <summary>
+        /// 配置elk连接
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="environment"></param>
+        /// <returns></returns>
         private static ElasticsearchSinkOptions ConfigureElasticSink(IConfigurationRoot configuration, string environment)
         {
             return new ElasticsearchSinkOptions(new Uri(configuration["ApplicationConfiguration:ElkAddress"]))

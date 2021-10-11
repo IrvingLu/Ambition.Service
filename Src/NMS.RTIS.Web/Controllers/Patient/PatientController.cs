@@ -1,15 +1,19 @@
-﻿/************************************************************************
-*本页作者    ：鲁岩奇
-*创建日期    ：2020/11/10 9:51:36 
-*功能描述    ：患者api
-*使用说明    ：前端调用
-***********************************************************************/
+﻿/**********************************************************************
+* 命名空间：NMS.RTIS.Web.Controllers
+*
+* 功  能：患者api
+* 类  名：PatientController
+* 日  期：2021/10/11 14:44:32
+* 负责人：lu-shuai
+*
+* 版权所有：公司
+*
+**********************************************************************/
 
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NMS.RTIS.Core.BaseDto;
-using NMS.RTIS.Core.Extensions;
 using NMS.RTIS.Service.Patient.Command;
 using System.Threading.Tasks;
 
